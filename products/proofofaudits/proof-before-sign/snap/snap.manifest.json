@@ -1,0 +1,29 @@
+{
+  "version": "0.5.1",
+  "description": "Check live review evidence before signing.",
+  "proposedName": "Proof Before Sign",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ProofOfAudits/veersec.git"
+  },
+  "source": {
+    "shasum": "9rVr+rFpMCKmkrp/jSmikwAYuIDxJIclKIE5bnxN4Cg=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/icon.svg",
+        "packageName": "@proofofaudits/proof-before-sign-snap",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+  "initialPermissions": {
+    "endowment:lifecycle-hooks": {},
+    "snap_dialog": {},
+    "endowment:transaction-insight": {},
+    "endowment:page-home": {},
+    "endowment:network-access": {},
+    "snap_manageState": {}
+  },
+  "manifestVersion": "0.1"
+}

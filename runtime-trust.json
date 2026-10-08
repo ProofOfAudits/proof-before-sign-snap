@@ -1,0 +1,23 @@
+{
+  "trustDomain": "poa-production-ethereum-v1",
+  "policyVersions": [
+    "poa_policy_v2"
+  ],
+  "signatureThreshold": 1,
+  "keys": [
+    {
+      "id": "poa-google-runtime-v1",
+      "version": 1,
+      "algorithm": "Ed25519",
+      "payloadType": "application/vnd.poa.runtime-proof.v1+json",
+      "publicKeyHex": "a16875405345d91554b9539d265c051b5365b7ed6b3ed99c4209428213a7a062",
+      "activateAt": "2026-10-06T15:37:50.450406869Z",
+      "retireAt": "2027-10-07T00:00:00Z",
+      "activateEpoch": 0,
+      "status": "ACTIVE",
+      "chains": [
+        "1"
+      ]
+    }
+  ]
+}

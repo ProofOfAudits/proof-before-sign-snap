@@ -1,0 +1,145 @@
+{
+  "version": "0.5.1",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "3fbddae568409d10ae2a06b62e40891a00a3b645fefef219d638e49edfd7770c",
+      "bytes": 72
+    },
+    {
+      "path": "README.md",
+      "sha256": "40f18690b5ba3b3d081c730c7a1445d499eed5463ea9a39fa2671a3c83af6bb3",
+      "bytes": 1548
+    },
+    {
+      "path": "SNAPPER_REVIEW.md",
+      "sha256": "0ed5837745b1f568cf2d43b86b06620bd6455cfbca955439a9ce684f3a7b0592",
+      "bytes": 2758
+    },
+    {
+      "path": "products/proofofaudits/frontend/public/logos/proofofaudits-mark.svg",
+      "sha256": "17cda5ce3df3912691b0ed200a5f5cb04d247b55d3742beea9d45a272172b19c",
+      "bytes": 1334
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/development-trust.json",
+      "sha256": "705e3875cb174e93bf6fd094be04b2aa1c8ef8f43c16314bf482a4ebdf669828",
+      "bytes": 546
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/dist/bundle.js",
+      "sha256": "386938ddb53cdac0b0157ab51e9125f1b18ae53cbf3ef0893340876157eb2c11",
+      "bytes": 175491
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/images/icon.svg",
+      "sha256": "17cda5ce3df3912691b0ed200a5f5cb04d247b55d3742beea9d45a272172b19c",
+      "bytes": 1334
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/package-lock.json",
+      "sha256": "f6311e249902ca7b1757bc5abf9a4946aeda88a1e1f16dc89b7cabb982769ee2",
+      "bytes": 289130
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/package.json",
+      "sha256": "a06f900c5e5054e24a0bac0f8f76377f171a05935d7d91da81af1a68c2028142",
+      "bytes": 670
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/build.mjs",
+      "sha256": "86d403df43d2cfb647719452e3944173a0268b73211d76e39047249178135776",
+      "bytes": 4389
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/prepare-release.mjs",
+      "sha256": "155c18d9ce8ccb5994f7df3e0ea9bc7d531d1f91863935779a3a5e4dad8006db",
+      "bytes": 5123
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/serve.mjs",
+      "sha256": "ead4d5e0a757744a209e564369816b59a1967475150a548a4be7c482b93f3b27",
+      "bytes": 2249
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/snap.manifest.json",
+      "sha256": "a6a86bb2938f463b58dd88f546f6b7d2f41317ee42389aee800ba962f8a1aa9c",
+      "bytes": 800
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/index.jsx",
+      "sha256": "9634e0b09e177171cdfdd4af5799edbe83663b7c27393bcc2bd09edbc339ccbb",
+      "bytes": 18443
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/runtime-proof.mjs",
+      "sha256": "0b99ab14417d0f112aebd6d285f3a6ebe8edac74c51b5a78269d49c00c941329",
+      "bytes": 11303
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/validate.mjs",
+      "sha256": "22e9e1364af6891b7be3da47289c5cef2e8101c70cb935476b0d8bc2a19560fd",
+      "bytes": 4391
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/wallet-visuals.jsx",
+      "sha256": "dc721990eabf3d6281e352f8127541d092b64e0ce90ea09b57310209a023e6e5",
+      "bytes": 11036
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/tsconfig.json",
+      "sha256": "b4b34b29b4d7188e0b940b99ee29c263ca412dd103bf1be2c94b92fed6281417",
+      "bytes": 479
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/aave-directory.mjs",
+      "sha256": "4add6956e00f417eefd293ce393f6423000a2680ddcfdc9a4366e9ea57cd1252",
+      "bytes": 707
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/check-contract.mjs",
+      "sha256": "1a0c5dfe53a045e7b821e729ce7c817dba4aad282a3a8d0102cd1298b81e181a",
+      "bytes": 19040
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/check-view.mjs",
+      "sha256": "1e837db4e5480a8c402806c67c4d4731bc948f9698b9965d66fb5a23d4e09ba1",
+      "bytes": 6861
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/evidence-view.mjs",
+      "sha256": "f85051e79ae9e15c06a8c83796937eb37b5a2e45e82438cb942e700b322328bd",
+      "bytes": 10895
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/runtime-contract.mjs",
+      "sha256": "8d6b39ffdd587b6faadf225fad5215b532dd0b75f373d985e735fcaad3cdb035",
+      "bytes": 821
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/since-review.mjs",
+      "sha256": "8f046a3be97e7a0eba6ed1f2ee2f22b3fb7d191ab0e9f070727bc6478f6b2d15",
+      "bytes": 2665
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/transaction-context.mjs",
+      "sha256": "e3489e6aaf658ae6bed7b1d1aa1586f3180a43cea398308654ce16ed0a479a25",
+      "bytes": 4044
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/visual-model.mjs",
+      "sha256": "719b1f0cddd50f6c816d02bfafb0c5e5739669b1be3c3a6352913920c35719c5",
+      "bytes": 8327
+    },
+    {
+      "path": "runtime-trust.json",
+      "sha256": "52e986047cf4103f3e503dba5690023af38cf1474542f27105c11523f3053f60",
+      "bytes": 582
+    },
+    {
+      "path": "snapper-arrow-disposition.json",
+      "sha256": "160fa9d8689d2416d3c4157256c9cde6f50489877b666846f6adc741ce5d8e86",
+      "bytes": 22981
+    }
+  ]
+}

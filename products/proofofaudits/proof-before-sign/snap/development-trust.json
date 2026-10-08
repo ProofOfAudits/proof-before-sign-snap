@@ -1,0 +1,22 @@
+{
+  "trustDomain": "poa-local-development-v1",
+  "policyVersions": [
+    "poa_policy_v2"
+  ],
+  "keys": [
+    {
+      "id": "poa-local-runtime-v1",
+      "version": 1,
+      "algorithm": "Ed25519",
+      "publicKeyHex": "e857d801d190da52e94fdf5f28228e4d94afd24d450ca8308f35daef4b63635c",
+      "status": "ACTIVE",
+      "activateAt": "2026-01-01T00:00:00Z",
+      "retireAt": "2030-01-01T00:00:00Z",
+      "activateEpoch": 0,
+      "payloadType": "application/vnd.poa.runtime-proof.v1+json",
+      "chains": [
+        "31337"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@proofofaudits/proof-before-sign-snap",
+  "version": "0.5.1",
+  "private": false,
+  "description": "Transaction-specific review evidence before signing",
+  "main": "dist/bundle.js",
+  "dependencies": {
+    "@metamask/snaps-sdk": "9.3.0",
+    "@noble/curves": "1.9.7",
+    "@noble/hashes": "1.8.0"
+  },
+  "devDependencies": {
+    "@metamask/snaps-jest": "10.2.1",
+    "@metamask/snaps-utils": "12.6.0",
+    "esbuild": "0.25.12",
+    "jest": "29.7.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "README.md",
+    "dist/bundle.js",
+    "snap.manifest.json",
+    "images/icon.svg"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  }
+}

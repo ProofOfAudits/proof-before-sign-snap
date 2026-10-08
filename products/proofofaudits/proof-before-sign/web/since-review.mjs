@@ -1,0 +1,13 @@
+// Templates only: evidence semantics come from the signed server read model.
+export function sinceReviewView(s){
+ if(!s||s.schemaVersion!=='poa_since_review_v1')return {headline:'? Change history not established',impact:'? Change impact not established',detail:'Current code equality does not prove unchanged history.',continuity:'? Continuity not established',distance:null,lastChange:null,why:[],changes:[],limitations:[]};
+ const recent=s.relevantChanges.at(-1);
+ const headline=s.freshness!=='FRESH'?'? Change monitoring delayed':recent?`${recent.dimension==='CONTROL'?'≠ Control changed':'≠ '+recent.kind.replaceAll('_',' ').toLowerCase()}`:s.currentMatch==='MATCH'?'✓ Current code matches review':'? Current review evidence incomplete';
+ const impact={AFFECTS_THIS_TRANSACTION:'≠ This transaction uses a changed subject',DOES_NOT_AFFECT_THIS_TRANSACTION:'✓ Observed path does not use the changed subject',IMPACT_UNKNOWN:'? Change impact not established',NO_RELEVANT_CHANGE:'No relevant change recorded in the observed window'}[s.transactionImpact];
+ const detail=recent?(recent.timeQuality==='BLOCK_BOUNDARY_PROVEN'?`Different block-end states between blocks ${recent.boundary.fromBlock} and ${recent.boundary.toBlock}; activation transaction not established.`:`First observed ${recent.firstObservedAt}. Exact activation time unknown.`):'Complete change history is not established.';
+ const continuity={CONTINUOUSLY_OBSERVED:'✓ Continuously observed',MONITORED_SINCE:'◐ Monitored since '+String(s.monitoringStartedAt??'').slice(0,10)+' · earlier history unknown',CURRENT_MATCH_ONLY:'? Current match only · history not proven',BROKEN:'≠ Continuity broken by an observed change',UNKNOWN:'? Continuity not established'}[s.state]??'? Continuity not established';
+ const d=s.distance;const distance=d&&[d.code,d.routing,d.control,d.openGaps].every(Number.isSafeInteger)?`${d.code} code · ${d.routing} routing · ${d.control} control changes · ${d.openGaps} open review gaps`:null;
+ const meaningful=s.relevantChanges.filter(c=>c.dimension!=='REVIEW_EVIDENCE').at(-1);
+ const lastChange=meaningful?'Last meaningful change: '+meaningful.kind.replaceAll('_',' ').toLowerCase()+' · '+(meaningful.timeQuality==='ACTIVATION_PROVEN'?'activated ':'first observed ')+String(meaningful.firstObservedAt).slice(0,16).replace('T',' ')+' UTC':null;
+ return {headline,impact,detail,continuity,distance,lastChange,why:Array.isArray(s.whyNotCurrent)?s.whyNotCurrent.map(String):[],changes:s.relevantChanges,limitations:s.limitations,state:s.state,window:s.monitoringStartedAt?'Monitoring since '+s.monitoringStartedAt:'? Monitoring start not established'};
+}
