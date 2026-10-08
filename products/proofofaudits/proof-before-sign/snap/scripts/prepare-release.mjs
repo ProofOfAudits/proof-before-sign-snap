@@ -18,13 +18,14 @@ const destination=resolve(stage,'products/proofofaudits/proof-before-sign/snap')
 await mkdir(destination,{recursive:true});
 for(const folder of ['src','scripts'])await cp(resolve(snap,folder),resolve(destination,folder),{recursive:true});
 await cp(resolve(proof,'web'),resolve(destination,'../web'),{recursive:true});
+await copyFile(resolve(snap,'tsconfig.json'),resolve(destination,'tsconfig.json'));
 await copyFile(resolve(snap,'development-trust.json'),resolve(destination,'development-trust.json'));
 await symlink(resolve(snap,'node_modules'),resolve(destination,'node_modules'),'dir');
 await mkdir(resolve(stage,'products/proofofaudits/frontend/public/logos'),{recursive:true});
 await copyFile(resolve(proof,'../frontend/public/logos/proofofaudits-mark.svg'),resolve(stage,'products/proofofaudits/frontend/public/logos/proofofaudits-mark.svg'));
 const original=JSON.parse(await readFile(resolve(snap,'package.json'),'utf8'));
 const packageName=process.env.POA_SNAP_PACKAGE_NAME??original.name;if(!/^@[a-z0-9-]+\/[a-z0-9-]+$/.test(packageName))throw Error('Invalid Snap package name');
-const pkg={name:packageName,version:original.version,description:original.description,main:'dist/bundle.js',private:false,repository:{type:'git',url:'https://github.com/ProofOfAudits/veersec.git'},files:['dist/bundle.js','snap.manifest.json','images/icon.svg','README.md'],publishConfig:{access:'public'}};
+const pkg={name:packageName,version:original.version,description:original.description,main:'dist/bundle.js',private:false,repository:{type:'git',url:'https://github.com/ProofOfAudits/proof-before-sign-snap.git'},files:['dist/bundle.js','snap.manifest.json','images/icon.svg','README.md'],publishConfig:{access:'public'}};
 await writeFile(resolve(destination,'package.json'),JSON.stringify(pkg,null,2)+'\n');
 await writeFile(resolve(destination,'README.md'),'# Proof Before Sign\n\nTransaction-specific security-review evidence inside MetaMask. Review evidence does not guarantee security. Missing evidence stays unknown. The proposed transaction is sent to the POA evidence service; recovery phrases and private keys are never requested.\n\nThis package is a release candidate. Publishing alone does not establish MetaMask allowlisting or mainnet wallet acceptance.\n');
 function run(command,args,env=process.env){const result=spawnSync(command,args,{cwd:destination,env,encoding:'utf8',timeout:60000});if(result.status!==0)throw Error('Release preparation failed: '+command);return result.stdout;}
@@ -39,8 +40,8 @@ const archive=resolve(destination,packed.filename);
 const packedFiles=run('tar',['-tzf',archive]).trim().split('\n').map(name=>name.replace(/^package\//,''));
 const permitted=new Set(['package.json','README.md','dist/bundle.js','snap.manifest.json','images/icon.svg']);
 if(packedFiles.length!==permitted.size||packedFiles.some(name=>!permitted.has(name)))throw Error('Release package contains unexpected files');
-const receipt={schemaVersion:'poa.snap-release-candidate/1',package:pkg.name,version:pkg.version,apiOrigin:new URL(process.env.POA_API_URL).origin,passportOrigin:new URL(process.env.POA_PASSPORT_URL).origin,trustPolicySha256:createHash('sha256').update(await readFile(trust)).digest('hex'),manifestShasum:manifest.source.shasum,archiveSha256:createHash('sha256').update(await readFile(archive)).digest('hex'),files:[...permitted],published:false,mainnetWalletAccepted:false};
+const receipt={schemaVersion:'poa.snap-release-candidate/1',package:pkg.name,version:pkg.version,apiOrigin:new URL(process.env.POA_API_URL).origin,passportOrigin:new URL(process.env.POA_PASSPORT_URL).origin,trustPolicySha256:createHash('sha256').update(await readFile(trust)).digest('hex'),manifestShasum:manifest.source.shasum,archiveSha256:createHash('sha256').update(await readFile(archive)).digest('hex'),files:[...permitted],sourceStage:destination,published:false,mainnetWalletAccepted:false};
 await mkdir(resolve(proof,'.local/release'),{recursive:true});
 const retained=resolve(proof,'.local/release',packed.filename);await copyFile(archive,retained);
-await writeFile(resolve(proof,'.local/release/snap-candidate.json'),JSON.stringify({...receipt,archive:retained},null,2)+'\n');
+await writeFile(resolve(proof,`.local/release/snap-candidate-${pkg.version}.json`),JSON.stringify({...receipt,archive:retained},null,2)+'\n');
 console.log(JSON.stringify({...receipt,archive:retained}));

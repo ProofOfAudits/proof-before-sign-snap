@@ -1,13 +1,13 @@
 {
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Check live review evidence before signing.",
   "proposedName": "Proof Before Sign",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ProofOfAudits/veersec.git"
+    "url": "https://github.com/ProofOfAudits/proof-before-sign-snap.git"
   },
   "source": {
-    "shasum": "9rVr+rFpMCKmkrp/jSmikwAYuIDxJIclKIE5bnxN4Cg=",
+    "shasum": "/qQZCVuDQzqwtAJaf5QrMvbu8SOaZewlAiaH7cOII3M=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
