@@ -7,7 +7,7 @@
     "url": "https://github.com/ProofOfAudits/proof-before-sign-snap.git"
   },
   "source": {
-    "shasum": "/qQZCVuDQzqwtAJaf5QrMvbu8SOaZewlAiaH7cOII3M=",
+    "shasum": "ZKO4LMbvWbsSCBj7o7ZOzupz8QM2X1QxVi4rop9k49o=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",

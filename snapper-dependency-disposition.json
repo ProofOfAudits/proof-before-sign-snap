@@ -1,395 +1,801 @@
 {
-  "candidateVersion": "0.5.2",
-  "scanner": "@sayfer_io/snapper@0.19.1",
-  "findingCount": 54,
-  "detectorsDisabled": false,
-  "productionDependencyAdvisories": 0,
-  "sourceBundleWarnings": 0,
-  "scanAcceptance": false,
-  "limitations": [
-    "OriginValidation requires snap.config.js; esbuild package has no dapp RPC entry point",
-    "Some detectors do not cover every JSX/MJS source file"
-  ],
+  "previousFindings": 54,
   "entries": [
     {
       "package": "@ethersproject/abi",
       "finding": "Vulnerability in @ethersproject/abi version 5.0.10 - 5.8.0: Vulnerability in @ethersproject/abi",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@ethersproject/abstract-provider",
       "finding": "Vulnerability in @ethersproject/abstract-provider version *: Vulnerability in @ethersproject/abstract-provider",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@ethersproject/abstract-signer",
       "finding": "Vulnerability in @ethersproject/abstract-signer version *: Vulnerability in @ethersproject/abstract-signer",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@ethersproject/hash",
       "finding": "Vulnerability in @ethersproject/hash version 5.0.6 - 5.8.0: Vulnerability in @ethersproject/hash",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@ethersproject/signing-key",
       "finding": "Vulnerability in @ethersproject/signing-key version <=5.8.0: Vulnerability in @ethersproject/signing-key",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@ethersproject/transactions",
       "finding": "Vulnerability in @ethersproject/transactions version <=5.8.0: Vulnerability in @ethersproject/transactions",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@istanbuljs/load-nyc-config",
       "finding": "Vulnerability in @istanbuljs/load-nyc-config version *: Vulnerability in @istanbuljs/load-nyc-config",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/console",
       "finding": "Vulnerability in @jest/console version 25.4.0 - 30.2.0: Vulnerability in @jest/console",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/core",
       "finding": "Vulnerability in @jest/core version <=30.2.0: Vulnerability in @jest/core",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/environment",
       "finding": "Vulnerability in @jest/environment version <=30.2.0: Vulnerability in @jest/environment",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/expect",
       "finding": "Vulnerability in @jest/expect version <=30.2.0: Vulnerability in @jest/expect",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/fake-timers",
       "finding": "Vulnerability in @jest/fake-timers version <=30.2.0: Vulnerability in @jest/fake-timers",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/globals",
       "finding": "Vulnerability in @jest/globals version <=30.2.0: Vulnerability in @jest/globals",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/reporters",
       "finding": "Vulnerability in @jest/reporters version <=30.2.0: Vulnerability in @jest/reporters",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/test-result",
       "finding": "Vulnerability in @jest/test-result version 25.4.0 - 30.2.0: Vulnerability in @jest/test-result",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/test-sequencer",
       "finding": "Vulnerability in @jest/test-sequencer version <=30.2.0: Vulnerability in @jest/test-sequencer",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@jest/transform",
       "finding": "Vulnerability in @jest/transform version *: Vulnerability in @jest/transform",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/analytics-controller",
       "finding": "Vulnerability in @metamask/analytics-controller version 1.1.0 - 3.0.0: Vulnerability in @metamask/analytics-controller",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/chain-agnostic-permission",
       "finding": "Vulnerability in @metamask/chain-agnostic-permission version *: Vulnerability in @metamask/chain-agnostic-permission",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/controller-utils",
       "finding": "Vulnerability in @metamask/controller-utils version >=8.0.3: Vulnerability in @metamask/controller-utils",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/ethjs-unit",
       "finding": "Vulnerability in @metamask/ethjs-unit version >=0.3.0: Vulnerability in @metamask/ethjs-unit",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/number-to-bn",
       "finding": "Vulnerability in @metamask/number-to-bn version *: Vulnerability in @metamask/number-to-bn",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/permission-controller",
       "finding": "Vulnerability in @metamask/permission-controller version >=8.0.1: Vulnerability in @metamask/permission-controller",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/snaps-controllers",
       "finding": "Vulnerability in @metamask/snaps-controllers version >=6.0.0: Vulnerability in @metamask/snaps-controllers",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/snaps-execution-environments",
       "finding": "Vulnerability in @metamask/snaps-execution-environments version >=5.0.0: Vulnerability in @metamask/snaps-execution-environments",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/snaps-jest",
       "finding": "Vulnerability in @metamask/snaps-jest version *: Vulnerability in @metamask/snaps-jest",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "B",
+      "previousRootChains": [
+        "@metamask/snaps-jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/snaps-rpc-methods",
       "finding": "Vulnerability in @metamask/snaps-rpc-methods version >=7.0.0: Vulnerability in @metamask/snaps-rpc-methods",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/snaps-simulation",
       "finding": "Vulnerability in @metamask/snaps-simulation version *: Vulnerability in @metamask/snaps-simulation",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "@metamask/snaps-utils",
       "finding": "Vulnerability in @metamask/snaps-utils version >=7.0.0: Vulnerability in @metamask/snaps-utils",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "B",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "argparse",
       "finding": "Vulnerability in argparse version 1.0.0 - 1.0.10: Vulnerability in argparse",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "babel-jest",
       "finding": "Vulnerability in babel-jest version >=24.2.0-alpha.0: Vulnerability in babel-jest",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "babel-plugin-istanbul",
       "finding": "Vulnerability in babel-plugin-istanbul version >=6.0.0-beta.0: Vulnerability in babel-plugin-istanbul",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "bn.js",
       "finding": "Vulnerability in bn.js version 5.0.0 - 5.2.2: Vulnerability in bn.js",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "braces",
       "finding": "Vulnerability in braces version *: Vulnerability in braces",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "create-jest",
       "finding": "Vulnerability in create-jest version 29.7.0 - 30.2.0: Vulnerability in create-jest",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "elliptic",
       "finding": "Vulnerability in elliptic version *: Vulnerability in elliptic",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "expect",
       "finding": "Vulnerability in expect version 21.0.0-beta.1 - 30.2.0: Vulnerability in expect",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest",
       "finding": "Vulnerability in jest version 23.5.0 - 30.2.0: Vulnerability in jest",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "B",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-circus",
       "finding": "Vulnerability in jest-circus version 20.1.0-alpha.1 - 30.2.0: Vulnerability in jest-circus",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-cli",
       "finding": "Vulnerability in jest-cli version 23.5.0 - 30.2.0: Vulnerability in jest-cli",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-config",
       "finding": "Vulnerability in jest-config version 18.1.0 - 19.0.4 || 23.5.0 - 30.2.0: Vulnerability in jest-config",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-environment-node",
       "finding": "Vulnerability in jest-environment-node version 24.2.0-alpha.0 - 30.2.0: Vulnerability in jest-environment-node",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-haste-map",
       "finding": "Vulnerability in jest-haste-map version 18.1.0 - 30.2.0: Vulnerability in jest-haste-map",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-message-util",
       "finding": "Vulnerability in jest-message-util version 18.5.0-alpha.7da3df39 - 30.2.0: Vulnerability in jest-message-util",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-resolve",
       "finding": "Vulnerability in jest-resolve version 18.1.0 - 19.0.2 || 24.2.0-alpha.0 - 24.5.0 || 27.1.0 - 30.2.0: Vulnerability in jest-resolve",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-resolve-dependencies",
       "finding": "Vulnerability in jest-resolve-dependencies version 23.3.0 - 30.2.0: Vulnerability in jest-resolve-dependencies",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-runner",
       "finding": "Vulnerability in jest-runner version 21.0.0-alpha.1 - 30.2.0: Vulnerability in jest-runner",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-runtime",
       "finding": "Vulnerability in jest-runtime version 18.1.0 - 30.2.0: Vulnerability in jest-runtime",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-snapshot",
       "finding": "Vulnerability in jest-snapshot version 23.3.0 - 30.2.0: Vulnerability in jest-snapshot",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "jest-watcher",
       "finding": "Vulnerability in jest-watcher version 25.4.0 - 30.2.0: Vulnerability in jest-watcher",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "js-yaml",
       "finding": "Vulnerability in js-yaml version 3.2.7 - 3.15.2: Vulnerability in js-yaml",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "micromatch",
       "finding": "Vulnerability in micromatch version >=0.2.0: Vulnerability in micromatch",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "sprintf-js",
       "finding": "Vulnerability in sprintf-js version *: Vulnerability in sprintf-js",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "jest"
+      ],
+      "finalInstalledCopies": [],
+      "action": "REMOVED_DEPENDENCY_CHAIN",
+      "resolved": true
     },
     {
       "package": "uuid",
       "finding": "Vulnerability in uuid version <11.1.1: Vulnerability in uuid",
       "riskRating": 2,
       "includedInBundle": false,
-      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE"
+      "disposition": "DEVELOPMENT_TOOLING_OUTSIDE_BUNDLE",
+      "classification": "D",
+      "previousRootChains": [
+        "@metamask/snaps-jest",
+        "@metamask/snaps-utils"
+      ],
+      "finalInstalledCopies": [
+        {
+          "path": "node_modules/uuid",
+          "version": "11.1.1"
+        }
+      ],
+      "action": "RETAINED_PATCHED_VERSION_FULL_AUDIT_CLEAN",
+      "resolved": true
     }
   ],
-  "processedFiles": 16,
-  "candidateBundleSha256": "3b66c383ccf444bd45cc6451116159b18624a21e26379c72d2f0a6c5940c4c8f"
+  "unresolvedActionableFindings": 0,
+  "detectorsDisabled": false,
+  "finalScanFindings": 0,
+  "fullBuildRuntimeAuditAdvisories": 0
 }

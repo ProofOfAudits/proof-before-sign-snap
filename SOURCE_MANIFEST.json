@@ -1,19 +1,19 @@
 {
   "version": "0.5.2",
+  "archiveSha256": "3e14f6e018855693f336abf443781d4dcabf800f99fb037e0ff3e46539857b81",
   "published": false,
-  "archiveSha256": "7a52ab0201cb9cb3ae955a1cf95e81c78ec55c722b11976f2ff0b093f24ea35d",
   "files": [
     {
       "path": ".gitignore",
-      "sha256": "c56e835a09e4232548ec2970074100c0dac58b9e100613794a95bef5e5f86b44"
+      "sha256": "fb5eea1ed9c466957b1802ec9faaa650218504f311d7cd60d8ef5cc6160ffd6a"
     },
     {
       "path": "README.md",
-      "sha256": "dca75ad1cdfeff6ae3d9b5f8bb5500877d38edb76f6e397b9ba7b73961b0dff2"
+      "sha256": "56a65861a44320be97d488c31142682e9f485e064e6b7bdedf835a8eec1f93ca"
     },
     {
       "path": "SNAPPER_REVIEW.md",
-      "sha256": "71e5a743b94d831ac334fdc6ad1857bc52bfc9c3918ad3f65b5002142434aa52"
+      "sha256": "78e51b26f5adad89652a69a0b25828f2a8eb7f371259b2dbfb53aa4c4010b289"
     },
     {
       "path": "products/proofofaudits/frontend/public/logos/proofofaudits-mark.svg",
@@ -25,7 +25,7 @@
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/dist/bundle.js",
-      "sha256": "3b66c383ccf444bd45cc6451116159b18624a21e26379c72d2f0a6c5940c4c8f"
+      "sha256": "df28ca7120fe00943f4117ddb1582feed04fb95352b76fa021be7f5e2eedf96d"
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/images/icon.svg",
@@ -33,15 +33,19 @@
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/package-lock.json",
-      "sha256": "14685293ed44d03e647510f6522809d7b29e8d2cc6c4389fc2bbef6a965af6d6"
+      "sha256": "7c767dd29ca4fdfc39eab03e040b4bf5ed5dd25ad29ebc35dceed1ad7d030279"
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/package.json",
-      "sha256": "b8a27c792bd1b025116b267212b5eb3692e44ae1caffc2418ea80cf1ff1cedd7"
+      "sha256": "bb4b869b7f601162f8cf69c0c429d2b3cb35453130937673f45faf3029827ca0"
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/scripts/build.mjs",
-      "sha256": "759b017c25db7a1a298442ada9716fe8b6ae2af9fb72bbddc603702e78e8a14c"
+      "sha256": "e8e4a9ed9da26878aa6cc1ddd34465909c9766ccea110a8c0e6dffbaf11f0c9f"
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/checksum.mjs",
+      "sha256": "6e60df57fb85ba29a9079aad12a267d05fd59724d938c4ad04f18bcf2db35407"
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/scripts/prepare-release.mjs",
@@ -53,11 +57,11 @@
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/snap.manifest.json",
-      "sha256": "0638e8809a24e9741b159c2a4b67c225bcb4160beed1ba98d761988de35a6364"
+      "sha256": "a65c292445ace6c4248062d9980f311e92960dd3ee1a4d2d432a35ea1d8775ae"
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/src/index.jsx",
-      "sha256": "e8dcd5d7d999aab091d0b3839e537892860110cc4578a778a267d0ef151f6241"
+      "sha256": "82910509567bb8d10470d4b980b6966d34b41f68fbd5a423d8099c608eba8b8e"
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/src/runtime-proof.mjs",
@@ -113,7 +117,7 @@
     },
     {
       "path": "snapper-dependency-disposition.json",
-      "sha256": "2655d8dfc33d1b337bec99a88a0465687e4c22e5c3514f5c10ef0f39dd180dc3"
+      "sha256": "cebe14036591b92b14eba1cb1e2dc8f54883ecf2e66fac9251a680aee3791624"
     }
   ]
 }

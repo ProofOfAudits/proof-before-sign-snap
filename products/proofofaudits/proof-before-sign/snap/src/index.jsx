@@ -101,7 +101,6 @@ function viewPanel(view,path,expanded,selected=0,holdersExpanded=false,legendExp
 
 export const onTransaction = async ({ transaction, chainId }) => {
   let timer, stage='normalize', httpStatus, requestId,verifiedExpiry;
-  const localDebug=POA_DEBUG && chainId==='eip155:31337';
   try {
     if (!/^eip155:[1-9][0-9]*$/.test(chainId)) throw Error('unsupported_chain');
     if(!transaction||typeof transaction!=='object')throw Error('invalid_transaction');
@@ -130,7 +129,6 @@ export const onTransaction = async ({ transaction, chainId }) => {
     const integrityFailure=['verify-runtime','verify-check','persist-epoch','validate'].includes(stage);
     const failure=integrityFailure?{symbol:'?',label:'POA proof could not be authenticated.',detail:'No audit verdict is shown. Request a fresh check.'}:friendlyFailure(error?.message);
     return { content: <Box><Text size="sm" color="muted">PROOF BEFORE SIGN</Text><Heading size="sm">{label(failure.symbol+' '+failure.label)}</Heading><Text>{label(failure.detail)}</Text>{!integrityFailure&&<Text size="sm" color="muted">UNKNOWN · No verdict is shown without verified evidence.</Text>}
-      {localDebug&&<Box><Heading>Local test diagnostic</Heading><Text>{`Snap ${POA_VERSION} · ${stage} · ${safeText(error?.message??String(error))}`}</Text><Text>{`API: ${POA_API_URL}${httpStatus?' · HTTP '+httpStatus:''}${requestId?' · Request '+requestId:''}`}</Text></Box>}
     </Box> };
   } finally { if (timer) clearTimeout(timer); }
 };
