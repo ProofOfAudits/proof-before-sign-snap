@@ -1,5 +1,5 @@
 {
-  "version": "0.5.1",
+  "version": "0.7.0",
   "files": [
     {
       "path": ".gitignore",
@@ -7,14 +7,14 @@
       "bytes": 72
     },
     {
-      "path": "README.md",
-      "sha256": "40f18690b5ba3b3d081c730c7a1445d499eed5463ea9a39fa2671a3c83af6bb3",
-      "bytes": 1548
+      "path": "LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
     },
     {
-      "path": "SNAPPER_REVIEW.md",
-      "sha256": "0ed5837745b1f568cf2d43b86b06620bd6455cfbca955439a9ce684f3a7b0592",
-      "bytes": 2758
+      "path": "README.md",
+      "sha256": "fb994a0d39e6109d1ebfa4d3bc7e1c293df738e7dba39d15daa8e470aadcc4ac",
+      "bytes": 1369
     },
     {
       "path": "products/proofofaudits/frontend/public/logos/proofofaudits-mark.svg",
@@ -22,39 +22,54 @@
       "bytes": 1334
     },
     {
+      "path": "products/proofofaudits/proof-before-sign/snap/README.md",
+      "sha256": "6f8bcb58130eb47c75d529fadf1c2d35f504bf89dbf25cbd74799bdb749aec71",
+      "bytes": 404
+    },
+    {
       "path": "products/proofofaudits/proof-before-sign/snap/development-trust.json",
       "sha256": "705e3875cb174e93bf6fd094be04b2aa1c8ef8f43c16314bf482a4ebdf669828",
       "bytes": 546
     },
     {
-      "path": "products/proofofaudits/proof-before-sign/snap/dist/bundle.js",
-      "sha256": "386938ddb53cdac0b0157ab51e9125f1b18ae53cbf3ef0893340876157eb2c11",
-      "bytes": 175491
-    },
-    {
-      "path": "products/proofofaudits/proof-before-sign/snap/images/icon.svg",
-      "sha256": "17cda5ce3df3912691b0ed200a5f5cb04d247b55d3742beea9d45a272172b19c",
-      "bytes": 1334
-    },
-    {
       "path": "products/proofofaudits/proof-before-sign/snap/package-lock.json",
-      "sha256": "f6311e249902ca7b1757bc5abf9a4946aeda88a1e1f16dc89b7cabb982769ee2",
-      "bytes": 289130
+      "sha256": "f7bf6c1578d95ae9aeea5ee2f5985c7fa12c655e554db4e7defd8c5bc9263fd6",
+      "bytes": 294927
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/package.json",
-      "sha256": "a06f900c5e5054e24a0bac0f8f76377f171a05935d7d91da81af1a68c2028142",
-      "bytes": 670
+      "sha256": "06188bb8106d4727954e1f8bb30041d46085a68a954cf5996d20d14c6a9066d5",
+      "bytes": 1134
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/assets/LICENSE-Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/scripts/build.mjs",
-      "sha256": "86d403df43d2cfb647719452e3944173a0268b73211d76e39047249178135776",
-      "bytes": 4389
+      "sha256": "cabc865a1f98b331dfe32c085f6ac8a72290b33951ecd8c1b47c7594f1ca95b2",
+      "bytes": 8583
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/check-manifest.mjs",
+      "sha256": "e94c97380921baa721721864fdcf491ba75acd9f6f1c4729a39bf859f2be1f7e",
+      "bytes": 1910
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/checksum.mjs",
+      "sha256": "6e60df57fb85ba29a9079aad12a267d05fd59724d938c4ad04f18bcf2db35407",
+      "bytes": 734
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/live-mainnet-check.mjs",
+      "sha256": "bf44599c808194dbb03fad02daa3817fc183dd628455b76a524c55c99f91bb1c",
+      "bytes": 7667
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/scripts/prepare-release.mjs",
-      "sha256": "155c18d9ce8ccb5994f7df3e0ea9bc7d531d1f91863935779a3a5e4dad8006db",
-      "bytes": 5123
+      "sha256": "6e8fad4a5b108340e56416017af6ed14c1d029e0fcad55bd86dcb63466389ab6",
+      "bytes": 12572
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/scripts/serve.mjs",
@@ -62,24 +77,74 @@
       "bytes": 2249
     },
     {
+      "path": "products/proofofaudits/proof-before-sign/snap/scripts/snap-dependencies.mjs",
+      "sha256": "a027ec07c0d1b86dbdbbd29a3c6585be0807b1943e880a9cff4fe914ae17ca69",
+      "bytes": 1175
+    },
+    {
       "path": "products/proofofaudits/proof-before-sign/snap/snap.manifest.json",
-      "sha256": "a6a86bb2938f463b58dd88f546f6b7d2f41317ee42389aee800ba962f8a1aa9c",
-      "bytes": 800
+      "sha256": "ce0ad36dc0722501c17566d1f77181ec442d2bb5cf428fbb6b746fa0d8769fed",
+      "bytes": 845
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/deferred/README.md",
+      "sha256": "7cc429b4d38951c7814bda7ed1ba0888bd07f524de153c370ccc871cc8eed1f7",
+      "bytes": 172
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/deferred/signature-handler.jsx",
+      "sha256": "7267c63318fcb5b5d32144c605d6c4d63148390eb7221dc1570bcbf45af34217",
+      "bytes": 1118
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/deferred/signature-insight.mjs",
+      "sha256": "884c147bd093d21c6528b9b8f8f749a1844b009beca4b98b1c9db4862cd5a257",
+      "bytes": 4782
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/src/index.jsx",
-      "sha256": "9634e0b09e177171cdfdd4af5799edbe83663b7c27393bcc2bd09edbc339ccbb",
-      "bytes": 18443
+      "sha256": "38fad22b0d63b5ae7631931b06536640a6113c178349112dd03b285deed8ba34",
+      "bytes": 37719
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/monitoring-disabled.mjs",
+      "sha256": "ea394ebe07abe79e84e54fb07e11e737cd0fd7783eca0413265708663c3ee105",
+      "bytes": 468
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/monitoring-home.jsx",
+      "sha256": "413608a5de133c236acb2d9af8d87e63936639dae510f268e286ffca59a9d27f",
+      "bytes": 3133
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/monitoring.mjs",
+      "sha256": "267b17b19bf50444ae88846b5d9dd5192dced2d977182f946de047ee7e91bb81",
+      "bytes": 9801
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/observation-view.jsx",
+      "sha256": "7d4d1bd85daadacc67857327de589e312d7c366171f84c3ddf825fa9b937e9b4",
+      "bytes": 7142
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/review-view.jsx",
+      "sha256": "abd3bb471d2c538cc8aa9d1376d5c895450f3da25f78db52efd9fd169cf05545",
+      "bytes": 3827
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/src/runtime-proof.mjs",
-      "sha256": "0b99ab14417d0f112aebd6d285f3a6ebe8edac74c51b5a78269d49c00c941329",
-      "bytes": 11303
+      "sha256": "f2b9957fba5c2184112dc9025b81f797e2b8817aad9a3ed7860f5c985a9aa584",
+      "bytes": 135
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/snap/src/settings.mjs",
+      "sha256": "b18e09287a05cb77a91b5496c81640443cff26e5eb3a2edfeee1093d0dc95d83",
+      "bytes": 1350
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/src/validate.mjs",
-      "sha256": "22e9e1364af6891b7be3da47289c5cef2e8101c70cb935476b0d8bc2a19560fd",
-      "bytes": 4391
+      "sha256": "3579d2891fa0c40e185f92f318f01cf66d64f9189147f3079529bfcf989ef161",
+      "bytes": 4608
     },
     {
       "path": "products/proofofaudits/proof-before-sign/snap/src/wallet-visuals.jsx",
@@ -87,9 +152,14 @@
       "bytes": 11036
     },
     {
+      "path": "products/proofofaudits/proof-before-sign/snap/trust/production-ethereum-v2v3.json",
+      "sha256": "4f15b5bb62dd71870fa03b76ccdd297917107406160cf5ea10bebb536f78089a",
+      "bytes": 756
+    },
+    {
       "path": "products/proofofaudits/proof-before-sign/snap/tsconfig.json",
-      "sha256": "b4b34b29b4d7188e0b940b99ee29c263ca412dd103bf1be2c94b92fed6281417",
-      "bytes": 479
+      "sha256": "68fab7803730d85fed572b17441a5925aa2d3374ad5fd903b75ec4ec6201698b",
+      "bytes": 565
     },
     {
       "path": "products/proofofaudits/proof-before-sign/web/aave-directory.mjs",
@@ -97,9 +167,14 @@
       "bytes": 707
     },
     {
+      "path": "products/proofofaudits/proof-before-sign/web/analysis-support.mjs",
+      "sha256": "f684711943a87bdbbe9dcbba6e0f25f45530bfde931b5607347470c362e3fba4",
+      "bytes": 1575
+    },
+    {
       "path": "products/proofofaudits/proof-before-sign/web/check-contract.mjs",
-      "sha256": "1a0c5dfe53a045e7b821e729ce7c817dba4aad282a3a8d0102cd1298b81e181a",
-      "bytes": 19040
+      "sha256": "db5943160f7a50df53886f6660792a1596ada2c2c53feb8910736f9b5fe8f44e",
+      "bytes": 19384
     },
     {
       "path": "products/proofofaudits/proof-before-sign/web/check-view.mjs",
@@ -107,9 +182,34 @@
       "bytes": 6861
     },
     {
+      "path": "products/proofofaudits/proof-before-sign/web/coverage-dimensions.mjs",
+      "sha256": "f542d6c3cf8990d00a365fea93f32bd5e0fe65ba6b29ed366e62163f17b294fd",
+      "bytes": 2889
+    },
+    {
       "path": "products/proofofaudits/proof-before-sign/web/evidence-view.mjs",
-      "sha256": "f85051e79ae9e15c06a8c83796937eb37b5a2e45e82438cb942e700b322328bd",
-      "bytes": 10895
+      "sha256": "f85836b8035ee9c572e3461bd42f6e3353e6e94ed2543a48344d391ef642cb4f",
+      "bytes": 12336
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/fastest-change.mjs",
+      "sha256": "2ed3eff3f274b068f654f9cc7c8784f0930c79b800de79943dfd568ad47f2c9e",
+      "bytes": 2285
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/production-assurance.mjs",
+      "sha256": "bf443d69156a374242cb066c1c0db43a6576697e0b9afecca28516214f04825a",
+      "bytes": 7736
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/protocol-directory.mjs",
+      "sha256": "e3863acec55115a536199cd08312bbd4547f14914fbe575a3453a57f87dd127b",
+      "bytes": 569
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/review-coverage.mjs",
+      "sha256": "f6b5693bda0b8b2d8cde739f905c7a2b8507e8e53b67b64196e6a132c74ed286",
+      "bytes": 6710
     },
     {
       "path": "products/proofofaudits/proof-before-sign/web/runtime-contract.mjs",
@@ -117,9 +217,24 @@
       "bytes": 821
     },
     {
+      "path": "products/proofofaudits/proof-before-sign/web/runtime-verifier.mjs",
+      "sha256": "53f4bf9f8c75f4a634fe2c8a617b6172f35f4d20f6a7a58589543c16c765995b",
+      "bytes": 23830
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/safe-control.mjs",
+      "sha256": "b346ea46ab60202df87ab586145ea5de84b0f7ed065bbf86a74dad40d89fbf4c",
+      "bytes": 4918
+    },
+    {
       "path": "products/proofofaudits/proof-before-sign/web/since-review.mjs",
       "sha256": "8f046a3be97e7a0eba6ed1f2ee2f22b3fb7d191ab0e9f070727bc6478f6b2d15",
       "bytes": 2665
+    },
+    {
+      "path": "products/proofofaudits/proof-before-sign/web/timelock-control.mjs",
+      "sha256": "11a1def9bfc7cdb7abcf486da8750c53926c20a306c43a8c374f5e6e8294bc22",
+      "bytes": 7933
     },
     {
       "path": "products/proofofaudits/proof-before-sign/web/transaction-context.mjs",
@@ -132,14 +247,14 @@
       "bytes": 8327
     },
     {
-      "path": "runtime-trust.json",
-      "sha256": "52e986047cf4103f3e503dba5690023af38cf1474542f27105c11523f3053f60",
-      "bytes": 582
+      "path": "products/proofofaudits/proof-before-sign/web/wallet-review-view.mjs",
+      "sha256": "33f905235c4b1a2dc1798b927b1ec85acd880426630657aea8ee112d8f54769d",
+      "bytes": 24530
     },
     {
-      "path": "snapper-arrow-disposition.json",
-      "sha256": "160fa9d8689d2416d3c4157256c9cde6f50489877b666846f6adc741ce5d8e86",
-      "bytes": 22981
+      "path": "runtime-trust.json",
+      "sha256": "4f15b5bb62dd71870fa03b76ccdd297917107406160cf5ea10bebb536f78089a",
+      "bytes": 756
     }
   ]
 }

@@ -1,4 +1,4 @@
-import {aaveDeployment} from './aave-directory.mjs';
+import {protocolDeployment} from './protocol-directory.mjs';
 // poa.check.v1 — the transaction check contract shared by the engine (server),
 // the MetaMask Snap and the Passport. It is a deterministic projection of the
 // existing poa_transaction_evidence_v1 proof (see web/transaction-context.mjs for
@@ -47,7 +47,9 @@ function hop(c,index,proof){
 }
 export function entryComponent(proof){
  const comps=Array.isArray(proof?.components)?proof.components:[];
- return comps.find(c=>lower(c.context)===lower(proof.target)&&c.relation!=='STATIC_REACHABLE')??comps.find(c=>lower(c.context)===lower(proof.target))??comps[0];
+ // The delegated implementation supplies the action's review baseline. The
+ // dispatcher remains an independent hop and still requires its own evidence.
+ return comps.find(c=>lower(c.context)===lower(proof.target)&&lower(c.address)!==lower(c.context)&&lower(c.selector)===lower(proof.decoded?.selector)&&c.relation!=='STATIC_REACHABLE')??comps.find(c=>lower(c.context)===lower(proof.target)&&c.relation!=='STATIC_REACHABLE')??comps.find(c=>lower(c.context)===lower(proof.target))??comps[0];
 }
 function findingsFor(proof,path){
  // Findings live inside approved (immutable, signed) snapshots. They affect
@@ -131,7 +133,7 @@ export function checkResponse(proof,options={}){
  const change=pathChange(proof,path,options.baseline??proof?.reviewBaseline,entry);
  const verdict={...computeVerdict(proof,{entry,findings,pathChange:change}),engine:VERDICT_ENGINE};
  const review=entry?.snapshot??entry?.previousReview;
- const description=aaveDeployment(proof?.chainId,proof?.target);
+ const description=protocolDeployment(proof?.chainId,proof?.target);
  const protocol=text(review?.protocol??entry?.reviewedCode?.protocol??comps.map(c=>c.snapshot?.protocol??c.previousReview?.protocol??c.reviewedCode?.protocol).find(Boolean)??description?.name,120);
  const runtime=path.filter(h=>h.relation!=='STATIC_REACHABLE');
  const s=proof?.sinceReview;

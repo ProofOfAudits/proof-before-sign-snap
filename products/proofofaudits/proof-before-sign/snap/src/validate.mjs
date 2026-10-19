@@ -1,7 +1,10 @@
 import {normalizedTransaction} from '../../web/transaction-context.mjs';
+// Components are deduplicated from signed trace frames, so they are bounded by
+// the engine's SIGNED_TRACE_FRAME_LIMIT (src/engine.ts). Keep the two equal.
+export const MAX_SIGNED_COMPONENTS=1024;
 export function validateProof(value) {
   if(!value||value.schemaVersion!=='poa_transaction_evidence_v1'||!['UNKNOWN','LIVE_ANALYSIS','PARTIAL','CHANGED','VERIFIED'].includes(value.state))throw Error('invalid_proof');
-  if(!Array.isArray(value.components)||value.components.length>256||value.total!==value.components.length)throw Error('invalid_components');
+  if(!Array.isArray(value.components)||value.components.length>MAX_SIGNED_COMPONENTS||value.total!==value.components.length)throw Error('invalid_components');
   const count=value.components.filter(c=>c.state==='VERIFIED').length;
   if(value.covered!==count)throw Error('invalid_coverage_count');
   if(value.state==='VERIFIED'&&value.policy?.mode==='PRODUCTION'&&!value.policy.fullAllowed)throw Error('production_policy_gate_failed');

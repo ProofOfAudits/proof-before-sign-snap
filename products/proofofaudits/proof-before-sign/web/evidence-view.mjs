@@ -1,3 +1,5 @@
+import {fastestChangeLabel} from './fastest-change.mjs';
+import {reviewCoverage} from './review-coverage.mjs';
 // One evidence-to-copy model for the wallet and Passport. No new verdicts,
 // token amounts, permissions or person identities are inferred by this layer.
 export const states={
@@ -72,7 +74,7 @@ export function evidenceView(proof){
   const compactGaps=[...(reviewMissing?[`${reviewMissing} ${reviewMissing===1?'review remains':'reviews remain'} unconfirmed`]:[]),...(nodes.some(n=>!n.control.known)?['Some upgrade permissions']:[])];
   if(!proof.traceComplete)compactGaps.unshift('Complete transaction path');
   if(proof.reasons?.includes('production_assurance_incomplete'))compactGaps.push('Production proof assurance');
-  return {pause,compactGaps,action:action(proof),status:states[proof.state]??states.UNKNOWN,state:proof.state,nodes,path:runtimePath(proof,nodes),pathConfirmed:!!proof.traceComplete&&(proof.traceFrames?.length??0)>0,
+  return {fastestChange:fastestChangeLabel(proof),pause,compactGaps,action:action(proof),status:states[proof.state]??states.UNKNOWN,state:proof.state,nodes,path:runtimePath(proof,nodes),pathConfirmed:!!proof.traceComplete&&(proof.traceFrames?.length??0)>0,
     summary:proof.total?`${proof.covered} of ${proof.total} important parts have current verified review evidence${proof.traceComplete?'.':' · complete path not confirmed.'}`:'No complete review path established.',
     gaps:[...new Set(gaps)],conclusion,holders,demo:nodes.some(n=>n.demo)};
 }
@@ -82,6 +84,22 @@ export function historyStory(change){
   return {title:titles[change.kind]??'A deployment change was recorded',detail:details[change.kind]??'The recorded fact changed; inspect its evidence below.'};
 }
 
+// Component counts come from the single shared classifier (review-coverage.mjs). Categories are disjoint
+// (CHANGED wins over an out-of-scope label). unresolved: distinct unmatched observed call steps (exact
+// address + context + selector; a depth-0 proxy entry is routing) plus unidentified components. null without a trace.
+export function componentCounts(proof){
+  const {counts}=reviewCoverage(proof);
+  const unresolved=Array.isArray(proof?.traceFrames)?counts.unresolved:counts.unresolved||null;
+  return {reviewed:counts.covered,changed:counts.changed,unknown:counts.unknown,excluded:counts.excluded,unresolved,total:counts.assessedComponents};
+}
+// Wallet Components row. Zero components or an incomplete trace is "Not established", never "0 unknown".
+export function componentCountsLabel(proof){
+  const counts=componentCounts(proof);
+  const text=counts.reviewed+' reviewed · '+counts.changed+' changed · '+counts.unknown+' unknown'+(counts.excluded>0?' · '+counts.excluded+' excluded':'')+(counts.unresolved>0?' · '+counts.unresolved+' unresolved':'');
+  if(counts.total===0)return 'Not established';
+  if(proof?.traceComplete!==true)return 'Not established (partial path: '+text+')';
+  return text;
+}
 // Wallet-only presentation: preserve the engine verdict and established counts.
 export function compactWalletSummary(proof){
   const view=evidenceView(proof);
@@ -95,5 +113,5 @@ export function compactWalletSummary(proof){
     if(missing.length===1){const node=missing[0],component=proof.components[node.index];explanation=component.coverageLevel==='EXPLICITLY_OUT_OF_SCOPE'?`${node.name} is outside confirmed review scope.`:node.state==='CHANGED'?`${node.name} differs from its reviewed version.`:`${node.name} review is not confirmed.`;}
     else explanation=missing.length?`${missing.length} parts have no current confirmed review.`:'Some required evidence is not established.';
   }
-  return {verdict,explanation,coverage:count};
+  return {verdict,explanation,coverage:count,counts:componentCounts(proof),countsLabel:componentCountsLabel(proof)};
 }

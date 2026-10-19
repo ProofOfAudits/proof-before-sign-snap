@@ -1,7 +1,8 @@
 {
   "trustDomain": "poa-production-ethereum-v1",
   "policyVersions": [
-    "poa_policy_v2"
+    "poa_policy_v2",
+    "poa_policy_v3"
   ],
   "signatureThreshold": 1,
   "keys": [
@@ -17,7 +18,8 @@
       "status": "ACTIVE",
       "chains": [
         "1"
-      ]
+      ],
+      "kmsKeyVersion": "projects/proof-of-audits-production/locations/us-central1/keyRings/poa-proof-v1/cryptoKeys/runtime-ed25519/cryptoKeyVersions/1"
     }
   ]
 }
