@@ -1,11 +1,20 @@
-# Proof Before Sign 0.7.0
-Public source snapshot for the `@proofofaudits/proof-before-sign-snap@0.7.0` Snap package. Publication on npm and MetaMask allowlisting are tracked separately; this snapshot does not claim either.
-Website: https://proofofaudits.com/try
+# Proof Before Sign 0.7.1
+
+Public source for @proofofaudits/proof-before-sign-snap@0.7.1. Apache-2.0.
+
+Publication and allowlisting are separate. Code-only live tests passed; exact installed-wallet acceptance has not been established for this version. Review coverage is not a guarantee of security. Missing evidence remains unknown.
+
 Support: veer@proofofaudits.com
-License: Apache-2.0 (see `LICENSE`).
-Use Node.js 22 or later. From `products/proofofaudits/proof-before-sign/snap`, run `npm ci`, then:
+Website: https://proofofaudits.com/try
+
+Build with Node 22 or later from products/proofofaudits/proof-before-sign/snap:
+
 ```sh
+npm ci --ignore-scripts
 POA_API_URL=https://proofofaudits.com POA_PASSPORT_URL=https://proofofaudits.com POA_RUNTIME_TRUST_FILE=../../../../runtime-trust.json npm run build
 ```
-The manifest checksum must equal `tqs86M0MLBXRwU/PHDV1bWJb4uBkkr+fDzxWrOW3qmI=` (also recorded in `products/proofofaudits/proof-before-sign/snap/snap.manifest.json`). The npm archive SHA256 of the release candidate is `941ddcc9f9c71289d24830ebe41d42bc705c162df8dd95ad017c475d5323866a`. The npm package contains only its five release files. `runtime-trust.json` is the public Ed25519 runtime trust embedded in the bundle; it contains public keys only.
-Only authenticated RELEASED evidence creates positive review coverage. Signature authentication does not guarantee that contracts are secure or that complete evidence exists. Missing evidence is shown as UNKNOWN. The service analyzes a proposed transaction and does not submit it. No recovery phrase or private key is requested.
+
+Expected manifest shasum: U6VtWnpsQ+tqekteN7rIj+UlS/KjdFI4I2S/A1/qdGw=
+Archive SHA256: 188cab9d41a74f0e2c55ccb4599539377733ac99665dc7d8735dc627273b99c9
+
+The public runtime trust contains public keys only. Change alerts are unavailable. See the Snap README for scope, privacy and limits.

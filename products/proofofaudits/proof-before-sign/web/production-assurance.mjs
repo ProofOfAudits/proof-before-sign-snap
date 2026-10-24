@@ -10,7 +10,7 @@ export function observationAssurance(proof,commitment){
  // Hash exactly the JSON representation transmitted in the signed envelope.
  // Optional absent observations must remain missing facts, not throw before UNKNOWN.
  const wireCommitment=value=>commitment(JSON.parse(JSON.stringify(value??null)));
- const failed=[];
+ const failed=[];if(proof.simulationConditions)failed.push('diagnostic_override_not_actual_chain_state');
  const pinned=/^[1-9][0-9]*$/.test(proof.chainId??'')&&proof.chainId!=='31337'&&/^0x[0-9a-f]+$/i.test(proof.block?.number??'')&&word(proof.block?.hash);
  if(!pinned)failed.push('pinned_supported_chain');
  if(!word(proof.block?.stateRoot))failed.push('reference_state_root');
@@ -31,7 +31,7 @@ export function observationAssurance(proof,commitment){
  return {schemaVersion:'poa-observation-assurance-v1',minimum:MINIMUM_OBSERVATION_ASSURANCE,level:failed.length?(observed?'OBSERVED':'UNKNOWN'):'STANDARD',providerAssurance:'PINNED_PROVIDER_OBSERVATIONS',referenceBlock:proof.block??null,traceSha256:wireCommitment(proof.traceFrames),stateObservationsSha256:wireCommitment(proof.storageTrace),codeIdentitiesSha256:wireCommitment((proof.components??[]).map(c=>({address:c.address,context:c.context,codeHash:c.codeHash??null}))),failedRequirements:failed};
 }
 export function serverAnalysisFailures(proof){
- const failed=[];
+ const failed=[];if(proof.simulationConditions)failed.push('diagnostic_override_not_actual_chain_state');
  if(proof.state!=='UNKNOWN')failed.push('server_analysis_state');
  if(!Array.isArray(proof.reasons)||proof.reasons.some(r=>r!=='client_finalization_required'))failed.push('no_unresolved_analysis_failure');
  if(proof.traceComplete!==true)failed.push('complete_runtime_trace');

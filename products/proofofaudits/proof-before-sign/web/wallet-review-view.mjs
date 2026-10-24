@@ -1,9 +1,11 @@
+import {executionAssurance} from './execution-assurance.mjs';
 // In-wallet review model shared by the Snap (and usable by the Explorer).
 // Pure and deterministic: built ONLY from reviewCoverage(proof) and fields of
 // the proof itself. No network, no signature checks. The Snap calls it only on
 // a proof that already passed verifyRuntimeProof -> validateProof ->
 // finalizeRuntimeProof (OWNER_DECISIONS 7). Every line it produces is derived
 // from the signed proof; nothing here can raise the verdict.
+import {callInstanceCoverage} from './call-instance-coverage.mjs';
 import {reviewCoverage,CLASS_LABELS,frameSelector} from './review-coverage.mjs';
 export const WALLET_REVIEW_SCHEMA='poa.wallet-review.v1';
 export const REVIEW_SECTIONS=['calls','evidence','unresolved','activity','history'];
@@ -146,16 +148,18 @@ function unresolvedReason(f,node){
  return 'no matching assessed component (code not assessed)';
 }
 function buildSections(proof,rc,labels){
- const components=Array.isArray(proof.components)?proof.components:[],frames=Array.isArray(proof.traceFrames)?proof.traceFrames:[];
+ const components=Array.isArray(proof.components)?proof.components:[],frames=callInstanceCoverage(proof).analysisStatus==='UNAVAILABLE'?[]:(proof.traceFrames??[]);
  const nodes=Array.isArray(proof.executionGraph?.nodes)?proof.executionGraph.nodes:[];
  const nodeAt=i=>nodes[i]?.index===i?nodes[i]:nodes.find(n=>n.index===i)??null;
  const calls=frames.map((f,i)=>{
-  const j=matchIndex(components,f),c=j>=0?components[j]:null,node=nodeAt(i),cls=rc.frames[i]?.class??'UNRESOLVED';
-  return {title:'↳ '.repeat(Math.min(Math.max(0,f.depth??0),6))+functionLabel(f,c,node,labels),tone:cls==='CHANGED_SINCE_REVIEW'?'warning':cls==='REVIEW_COVERED'?'success':'muted',
-   lines:['#'+(i+1)+' · '+(f.type??'CALL')+' · depth '+(f.depth??0)+' · '+frameStatus(f),CLASS_LABELS[cls]+classDetail(cls,c),routingLine(f,node)]};
+  const j=matchIndex(components,f),c=j>=0?components[j]:null,node=nodeAt(i),cls=rc.frames[i]?.class??'UNRESOLVED',region=proof.executionRegions?.frames?.find(r=>r.frameIndex===i);
+  const regionGap=region&&(region.excludedSteps>0||region.unknownSteps>0);
+  return {title:'↳ '.repeat(Math.min(Math.max(0,f.depth??0),6))+functionLabel(f,c,node,labels),tone:regionGap||cls==='CHANGED_SINCE_REVIEW'?'warning':cls==='REVIEW_COVERED'?'success':'muted',
+   lines:['#'+(i+1)+' · '+(f.type??'CALL')+' · depth '+(f.depth??0)+' · '+frameStatus(f),(region?'Entry scope: ':'')+CLASS_LABELS[cls]+classDetail(cls,c),routingLine(f,node),...(region?['Instructions: '+region.coveredSteps+' within scope · '+region.excludedSteps+' excluded · '+region.unknownSteps+' unknown',...(region.evidence?['Region evidence: '+region.evidence.auditor+' · '+region.evidence.report]:[]),...(region.reason?['Region gap: '+region.reason]:[])]:[])]};
  });
  const evidence=components.map((c,j)=>{
   const cls=rc.componentClasses[j],review=c.snapshot??c.previousReview,lines=[CLASS_LABELS[cls]+classDetail(cls,c)];
+  const regionGap=(proof.executionRegions?.frames??[]).some(r=>r.codeAddress===c.address&&r.context===c.context&&(r.excludedSteps>0||r.unknownSteps>0));
   lines.push('Code '+short(c.address)+' · storage '+short(c.context)+' · '+(c.callType??'CALL'));
   if(review){
    lines.push('Audit: '+(review.auditor??'auditor not established')+(review.auditDate?' · '+review.auditDate:'')+' · report '+(review.report??'not established'));
@@ -167,7 +171,7 @@ function buildSections(proof,rc,labels){
   lines.push('Current code '+(shortHash(c.codeHash)??'not established')+(c.currentMatch?' · current match '+c.currentMatch:''));
   if(cls==='CHANGED_SINCE_REVIEW'&&review&&(lower(review.runtimeHash)!==lower(c.codeHash)||lower(review.implementation)!==lower(c.address)))lines.push('Change: '+(lower(review.implementation)!==lower(c.address)?'implementation '+short(review.implementation)+' → '+short(c.address):'runtime '+(shortHash(review.runtimeHash)??'?')+' → '+(shortHash(c.codeHash)??'?')));
   if(cls==='REVIEW_COVERAGE_UNKNOWN'&&c.sourceStatus==='SOURCE_VERIFIED')lines.push('Verified source code is not verified audit scope.');
-  return {title:componentLabel(c,labels),tone:cls==='CHANGED_SINCE_REVIEW'?'warning':cls==='REVIEW_COVERED'?'success':'muted',lines};
+  return {title:componentLabel(c,labels),tone:regionGap||cls==='CHANGED_SINCE_REVIEW'?'warning':cls==='REVIEW_COVERED'?'success':'muted',lines};
  });
  const unresolved=[];const steps=new Map();
  for(const [i,f] of frames.entries()){
@@ -211,6 +215,8 @@ function mainReason(proof,rc,sections,labels){
  const unresolved=sections.unresolved[0];if(unresolved)return unresolved.title+': '+(unresolved.lines.find(l=>l.startsWith('Unresolved: '))?.slice(12)??unresolved.lines[0]);
  const unknown=first('REVIEW_COVERAGE_UNKNOWN');if(unknown)return componentLabel(unknown,labels)+': '+(unknown.reason??'review coverage not established');
  const excluded=first('EXCLUDED_FROM_REVIEW');if(excluded)return componentLabel(excluded,labels)+': explicitly excluded from review';
+ if(rc.reasons.includes('instruction_scope_incomplete'))return 'Some executed instructions lack established audit scope';
+ if(rc.reasons.includes('integration_scope_incomplete'))return 'Some observed call edges lack explicit integration review';
  const gate=proof.policy?.failedGates?.[0]??proof.reasons?.[0];
  return gate?words(gate):null;
 }
@@ -239,7 +245,7 @@ export function walletReviewModel(proof,{section='summary',page=0,pageSize=5,iss
   checkedBlock:block?{number:blockNumber(block.number),hex:block.number,hash:lower(block.hash)}:null,
   checkedBlockLine:block?'Checked block '+(blockNumber(block.number)??block.number)+' · '+shortHash(block.hash):'Checked block not established',
   freshness:issued?'Evidence issued '+age+' s ago · '+issued:'Evidence issue time not established',
-  executionMode:proof.executionMode??'SIMULATION',signedDetail:'All details are from the signed, transaction-bound proof.'};
+  executionMode:proof.executionMode??'SIMULATION',signedDetail:'All details are from the signed, transaction-bound proof.',callCoverage:callInstanceCoverage(proof),executionAssurance:executionAssurance(proof)};
  const model={schemaVersion:WALLET_REVIEW_SCHEMA,analysisId:typeof proof.passportUrl==='string'&&/^\/proof\/transaction\/[0-9a-f-]{36}$/i.test(proof.passportUrl)?proof.passportUrl.slice(19):null,
   summary,warnings,sections,sectionCounts:Object.fromEntries(REVIEW_SECTIONS.map(k=>[k,sections[k].length])),pageSize:Number.isSafeInteger(pageSize)&&pageSize>0&&pageSize<=20?pageSize:5};
  return reviewPage(model,{section,page});

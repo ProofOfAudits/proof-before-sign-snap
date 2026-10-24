@@ -2,7 +2,7 @@ import {userState,weakestLink} from '../../web/runtime-contract.mjs';
 import {walletTransaction} from '../../web/transaction-context.mjs';
 import { Box, Section, Heading, Text, Divider, Link, Button, Row } from '@metamask/snaps-sdk/jsx';
 import { validateProof, transactionPassport, safeText } from './validate.mjs';
-import {verifyRuntimeProof,verifyRuntimeObservation,checkObservationEpoch,runtimeObservationDeadline,persistVerifiedEpoch,finalizeRuntimeProof,runtimeProofDeadline,acceptEpoch,commitment} from './runtime-proof.mjs';
+import {verifyRuntimeProof,verifyRuntimeObservation,verifyRuntimeSimulation,checkObservationEpoch,runtimeObservationDeadline,persistVerifiedEpoch,finalizeRuntimeProof,runtimeProofDeadline,acceptEpoch,commitment} from './runtime-proof.mjs';
 import {WalletPath,WalletInspector,WalletHolders,WalletLegend} from './wallet-visuals.jsx';
 import {visualModel} from '../../web/visual-model.mjs';
 import { evidenceView,compactWalletSummary } from '../../web/evidence-view.mjs';
@@ -12,6 +12,7 @@ import {checkRows,hopLine,verdictCopy,friendlyFailure} from '../../web/check-vie
 
 import {monitoringPreferences,watchSubject,pollMonitoring,disableMonitoring} from './monitoring.mjs';
 import {MonitoringHome} from './monitoring-home.jsx';
+const diagnosticSimulation=typeof POA_DIAGNOSTIC_SIMULATION!=='undefined'&&POA_DIAGNOSTIC_SIMULATION;
 const monitoringEnabled=typeof POA_ENABLE_MONITORING!=='undefined'&&POA_ENABLE_MONITORING;
 const monitoringOrigin=typeof POA_MONITORING_URL!=='undefined'?POA_MONITORING_URL:'';
 const homeInterfaces=new Map();let offeredSubjects=[];
@@ -179,14 +180,23 @@ export const onTransaction = async ({ transaction, chainId }) => {
     const nonce=requestNonce();stage='fetch';
     const proof = await Promise.race([
       (async () => {
-        const response = await fetch(POA_API_URL + '/api/proof/analyze', { method: 'POST', headers: { 'content-type': 'application/json','x-poa-nonce':nonce,'x-poa-snap-version':POA_VERSION,'x-poa-runtime-schema':'poa-runtime-v1','x-poa-calldata-sha256':commitment(payload.data),'x-poa-request-sha256':commitment(payload) }, body: JSON.stringify(payload) });
+        const response = await fetch(POA_API_URL + '/api/proof/analyze'+(diagnosticSimulation?'?simulation=sender-balance-override':''), { method: 'POST', headers: { 'content-type': 'application/json','x-poa-nonce':nonce,'x-poa-snap-version':POA_VERSION,'x-poa-runtime-schema':'poa-runtime-v1+content-commitment-v1','x-poa-calldata-sha256':commitment(payload.data),'x-poa-request-sha256':commitment(payload) }, body: JSON.stringify(payload) });
         httpStatus=response.status;requestId=response.headers?.get('x-poa-request-id');
         stage='response';
         if (!response.ok) throw Error('api_http_'+httpStatus);
         const body=await response.json();stage='verify-runtime';let signed;
-        try{signed=verifyRuntimeProof(body.runtimeProof,payload,nonce,POA_RUNTIME_TRUST);}
+        try{if(diagnosticSimulation){const observation=verifyRuntimeSimulation(body.runtimeProof,payload,nonce,POA_RUNTIME_TRUST);validateProof(JSON.parse(JSON.stringify(observation.proof)));transactionPassport(observation.proof,payload);await checkObservationEpoch(observation,POA_RUNTIME_TRUST,r=>snap.request(r));return {readOnlyObservation:observation};}signed=verifyRuntimeProof(body.runtimeProof,payload,nonce,POA_RUNTIME_TRUST);}
         catch(error){
           if(error?.message!=='minimum_observation_assurance_failed')throw error;
+          const observation=verifyRuntimeObservation(body.runtimeProof,payload,nonce,POA_RUNTIME_TRUST);
+          validateProof(JSON.parse(JSON.stringify(observation.proof)));transactionPassport(observation.proof,payload);
+          await checkObservationEpoch(observation,POA_RUNTIME_TRUST,r=>snap.request(r));
+          return {readOnlyObservation:observation};
+        }
+        // A complete observation is not approved review coverage. Keep a
+        // non-eligible production result on the read-only evidence interface,
+        // without persisting an assured epoch or presenting review authority.
+        if(signed.policyVersion==='poa_policy_v3'&&signed.proof.policy.serverAnalysisEligible===false){
           const observation=verifyRuntimeObservation(body.runtimeProof,payload,nonce,POA_RUNTIME_TRUST);
           validateProof(JSON.parse(JSON.stringify(observation.proof)));transactionPassport(observation.proof,payload);
           await checkObservationEpoch(observation,POA_RUNTIME_TRUST,r=>snap.request(r));
@@ -195,9 +205,10 @@ export const onTransaction = async ({ transaction, chainId }) => {
         let verified=validateProof(JSON.parse(JSON.stringify(signed.proof)));transactionPassport(verified,payload);stage='verify-check';verified.verifiedCheck=verifyCheck(verified.check,verified);stage='persist-epoch';const epochReceipt=await recordEpoch(signed);verified=validateProof(finalizeRuntimeProof(signed,epochReceipt));verified.verifiedCheck=verifyCheck(verified.check,verified);verifiedExpiry=runtimeProofDeadline(signed);verifiedIssuedAt=signed.issuedAt;stage='validate';reviewEligible.add(verified);
         return verified;
       })(),
-      new Promise((_, reject) => { timer = setTimeout(() => reject(Error('timeout')), 9000); }),
+      new Promise((_, reject) => { timer = setTimeout(() => reject(Error('timeout')), 30000); }),
     ]);
     if(proof.readOnlyObservation){
+      stage='render-observation';
       const p=proof.readOnlyObservation,observation=p.proof;
       if(Date.now()>=runtimeObservationDeadline(p))throw Error('expired_runtime_proof');
       offerSubjects(observation.chainId,[observation.target]);
@@ -221,8 +232,9 @@ export const onTransaction = async ({ transaction, chainId }) => {
     if(typeof snap!=='undefined'&&snap.request)return {id:await snap.request({method:'snap_createInterface',params:{ui:viewPanel(view,context.path,false),context}})};
     return {content:viewPanel(view,context.path,false)};
   } catch(error) {
+    if(diagnosticSimulation)console.error(JSON.stringify({event:'POA_DIAGNOSTIC_FAILURE',stage,errorName:error?.name,detail:String(error?.message??'').replace(/0x[a-f0-9]{40,}/gi,'[hex redacted]').slice(0,140),code:/^[a-z0-9_]{1,100}$/.test(error?.message??'')?error.message:'host_or_ui_error',httpStatus,requestId}));
     const integrityFailure=['verify-runtime','verify-check','persist-epoch','validate'].includes(stage);
-    const failure=integrityFailure?{symbol:'?',label:'POA proof could not be authenticated.',detail:'No audit verdict is shown. Request a fresh check.'}:friendlyFailure(error?.message);
+    const failure=stage==='render-observation'?{symbol:'?',label:'POA display unavailable',detail:'The transaction insight could not be displayed. No signing authorization is granted.'}:integrityFailure?{symbol:'?',label:'POA proof could not be authenticated.',detail:'No audit verdict is shown. Request a fresh check.'}:friendlyFailure(error?.message);
     return { content: <Box><Text size="sm" color="muted">PROOF BEFORE SIGN</Text><Heading size="sm">{label(failure.symbol+' '+failure.label)}</Heading><Text>{label(failure.detail)}</Text>{!integrityFailure&&<Text size="sm" color="muted">UNKNOWN · No verdict is shown without verified evidence.</Text>}
     </Box> };
   } finally { if (timer) clearTimeout(timer); }
@@ -300,7 +312,7 @@ async function homeUi(item={page:0}){
  const last=state?.lastCheck,paused=!settings||settings.checks==='PAUSED'||settings.pausedAll;
  let connectivity=!settings?'not contacted · settings unavailable':paused?'not contacted while paused':item.runtime??'Unavailable';
  // One config check per home interface while active; re-renders after button clicks reuse it.
- if(!paused&&!item.runtime){try{const r=await Promise.race([fetch(POA_API_URL+'/api/proof/config'),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),3000))]);if(r.ok){const c=await r.json();if(c.runtimeProofConfigured&&c.runtimeSchema==='poa-runtime-v1')connectivity='Reachable · signed Runtime v1';}}catch{connectivity='Unavailable';}item.runtime=connectivity;}
+ if(!paused&&!item.runtime){try{const r=await Promise.race([fetch(POA_API_URL+'/api/proof/config'),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),30000))]);if(r.ok){const c=await r.json();if(c.runtimeProofConfigured&&c.runtimeSchema==='poa-runtime-v1')connectivity='Reachable · signed Runtime v1';}}catch{connectivity='Unavailable';}item.runtime=connectivity;}
  const alerts=alertsActive(settings);if(alerts){item.offered=offeredSubjects.slice();try{preferences=monitoringPreferences(state);}catch{item.notice=item.notice??'Monitoring preferences are unavailable.';}}
  item.page=Math.min(item.page??0,Math.max(0,Math.ceil((preferences?.history?.length??0)/5)-1));
  const lastState=last?(last.verdict==='VERIFIED_MATCH'?'VERIFIED':last.verdict==='DRIFT'?'CHANGED':['PARTIAL','EXECUTION_PATH_WARNING','REVIEW_WARNING'].includes(last.verdict)?'PARTIAL':'NOT VERIFIED'):null;

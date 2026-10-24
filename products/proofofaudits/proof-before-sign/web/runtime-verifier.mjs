@@ -1,3 +1,5 @@
+import {validateSimulationContext} from './simulation-context.mjs';
+import {openRuntimeContent} from './runtime-content.mjs';
 import {productionAnalysisPolicy,PRODUCTION_POLICY} from './production-assurance.mjs';
 import {verifyTimelockControlState} from './timelock-control.mjs';
 import {verifySafeControlState} from './safe-control.mjs';
@@ -28,10 +30,11 @@ export function verifyRuntimeProof(envelope,tx,nonce,policy,now=Date.now()){
 // enter the authorization/finalization capability maps used by assured proofs.
 export function verifyRuntimeObservation(envelope,tx,nonce,policy,now=Date.now()){
  const p=verifyBoundEnvelope(envelope,tx,nonce,policy,now,true);
- if(p.policyVersion!==PRODUCTION_POLICY||p.proof.state!=='UNKNOWN'||p.proof.policy.fullAllowed!==false||p.proof.policy.serverAnalysisEligible!==false)throw Error('read_only_observation_required');
+ if(p.policyVersion!==PRODUCTION_POLICY||!['UNKNOWN','LIVE_ANALYSIS','PARTIAL','CHANGED'].includes(p.proof.state)||p.proof.policy.fullAllowed!==false||p.proof.policy.serverAnalysisEligible!==false)throw Error('read_only_observation_required');
  return p;
 }
-function verifyBoundEnvelope(envelope,tx,nonce,policy,now,readOnly){
+export function verifyRuntimeSimulation(envelope,tx,nonce,policy,now=Date.now()){const p=verifyBoundEnvelope(envelope,tx,nonce,policy,now,true,true);validateSimulationContext(p.proof,normalizedTransaction(tx),commitment);if(p.policyVersion!==PRODUCTION_POLICY)throw Error('diagnostic_production_signature_required');return p;}
+function verifyBoundEnvelope(envelope,tx,nonce,policy,now,readOnly,allowSimulation=false){
  if(!envelope||envelope.payloadType!==TYPE||!Array.isArray(envelope.signatures)||envelope.signatures.length>8)throw Error('wrong_or_missing_runtime_envelope');
  const bytes=decode(envelope.payload),message=pae(TYPE,bytes);
  const trusted=policy.keys.filter(k=>k.algorithm==='Ed25519'&&k.payloadType===TYPE&&k.status==='ACTIVE'&&Date.parse(k.activateAt)<=now&&now<Date.parse(k.retireAt)&&k.chains.includes(tx.chainId));
@@ -40,7 +43,8 @@ function verifyBoundEnvelope(envelope,tx,nonce,policy,now,readOnly){
  if(new Set(authenticated.map(k=>k.publicKeyHex)).size<threshold)throw Error('untrusted_or_invalid_signature');
  // Decode semantic fields only after authentication. Canonical equality also
  // rejects duplicate keys and alternate JSON representations.
- const raw=new TextDecoder('utf-8',{fatal:true}).decode(bytes),p=JSON.parse(raw);if(canonical(p)!==raw)throw Error('noncanonical_payload');
+ const raw=new TextDecoder('utf-8',{fatal:true}).decode(bytes),signed=JSON.parse(raw);if(canonical(signed)!==raw)throw Error('noncanonical_payload');
+ const p=openRuntimeContent(envelope,signed,decode,canonical);
  if(Object.keys(p).length!==runtimeFields.length||runtimeFields.some(k=>!Object.hasOwn(p,k)))throw Error('unsupported_runtime_schema');
  const issued=Date.parse(p.issuedAt),expiry=Date.parse(p.expiresAt);if(!Number.isFinite(issued)||!Number.isFinite(expiry)||expiry<=now||issued>now+5000||expiry<=issued||expiry-issued>60000)throw Error('expired_or_invalid_runtime_proof');
  if(p.schemaVersion!==RUNTIME_SCHEMA||p.transactionFingerprintSha256!==commitment(normalizedTransaction(tx))||p.chainId!==tx.chainId||p.nonce!==nonce||!/^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(p.analysisId??''))throw Error('runtime_transaction_binding_failed');
@@ -49,7 +53,7 @@ function verifyBoundEnvelope(envelope,tx,nonce,policy,now,readOnly){
  if(!Array.isArray(p.controllerManifest)||commitment({snapshots:p.evidenceSnapshots,controllers:p.controllerManifest})!==p.evidenceRootSha256)throw Error('evidence_root_mismatch');
  if(new Set(p.evidenceSnapshots.map(e=>e.id)).size!==p.evidenceSnapshots.length||p.evidenceSnapshots.some(e=>typeof e.id!=='string'||!Number.isSafeInteger(e.epoch)||e.epoch<1||e.epoch>p.evidenceEpoch||!hash(e.packageSha256)||!hash(e.root)))throw Error('invalid_snapshot_manifest');
  const request=normalizedTransaction(tx);if(canonical(p.requestBinding)!==canonical({target:request.to,value:request.value,calldataSha256:commitment(request.data)}))throw Error('runtime_request_binding_failed');
- const proof=p.proof;if(!proof||proof.passportUrl!=='/proof/transaction/'+p.analysisId||proof.chainId!==p.chainId||commitment(normalizedTransaction(proof.transaction))!==p.transactionFingerprintSha256||canonical(proof.block??null)!==canonical(p.analysisBlock)||canonical(proof.policy??null)!==canonical(p.policy)||canonical(proof.components)!==canonical(p.coverageDecisions)||canonical({authorities:proof.components.map(c=>({context:c.context,authority:c.authority??null})),capabilityGraph:proof.controlGraph??null})!==canonical(p.controlResult)||proof.state!==p.overallResult||canonical(proof.reasons)!==canonical(p.warnings))throw Error('runtime_commitment_mismatch');
+ const proof=p.proof;if(proof?.simulationConditions&&!allowSimulation)throw Error('explicit_simulation_consent_required');if(!proof||proof.passportUrl!=='/proof/transaction/'+p.analysisId||proof.chainId!==p.chainId||commitment(normalizedTransaction(proof.transaction))!==p.transactionFingerprintSha256||canonical(proof.block??null)!==canonical(p.analysisBlock)||canonical(proof.policy??null)!==canonical(p.policy)||canonical(proof.components)!==canonical(p.coverageDecisions)||canonical({authorities:proof.components.map(c=>({context:c.context,authority:c.authority??null})),capabilityGraph:proof.controlGraph??null})!==canonical(p.controlResult)||proof.state!==p.overallResult||canonical(proof.reasons)!==canonical(p.warnings))throw Error('runtime_commitment_mismatch');
  if(p.userState!==userState(proof.state)||p.weakestLink!==weakestLink(proof))throw Error('runtime_display_binding_failed');
  // A valid server signature cannot introduce a new policy mode or weaken a
  // boolean gate through JSON coercion. UNKNOWN responses may omit policy.

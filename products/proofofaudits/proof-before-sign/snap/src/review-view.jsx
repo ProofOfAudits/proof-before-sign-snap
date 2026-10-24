@@ -12,7 +12,7 @@ function SectionButton({name,review}){
  return <Button name={'poa-review-'+name} size="sm">{text((open?'▾ ':'')+sectionNames[name]+(name==='activity'?'':' ('+n+')'))}</Button>;
 }
 export function ReviewPanel({review,explorerUrl}){
- const s=review.summary,c=s.counts,open=review.section!=='summary';
+ const s=review.summary,c=s.counts,calls=s.callCoverage,open=review.section!=='summary';
  return <Box>
   <Section>
    <Text size="sm" color="muted">Review coverage · this exact transaction</Text>
@@ -20,6 +20,18 @@ export function ReviewPanel({review,explorerUrl}){
    <Text fontWeight="bold" color={verdictColor[s.verdict]??'warning'}>{text(s.explanation)}</Text>
    {s.reason&&<Text size="sm">{text('Why: '+s.reason)}</Text>}
    {review.warnings.map(w=><Text fontWeight="bold" color="warning">{text(w)}</Text>)}
+   {!!calls&&<Box>
+    <Row label="Execution analysis"><Text>{text(calls.analysisStatus)}</Text></Row>
+    {calls.analysisStatus==='UNAVAILABLE'?<Text>Execution was not observed. Call counts are unknown, not zero.</Text>:<Box>
+     <Text>{text(calls.counts.total+' calls · '+calls.counts.covered+' covered · '+calls.counts.changed+' changed · '+calls.counts.uncovered+' uncovered · '+calls.counts.unknown+' unknown')}</Text>
+     <Text size="sm">{text(calls.uniqueFunctions+' identified functions · '+calls.uniqueContracts+' identified contracts. Repeated EVM calls count separately.')}</Text>
+     {!!calls.unreturnedFrames&&<Text>{text(calls.unreturnedFrames+' additional frames were not returned. These counts cover returned frames only.')}</Text>}
+     {!!calls.nonContractFrames&&<Text size="sm">Non-contract frames are not audit-review subjects and remain in Unknown.</Text>}
+    </Box>}
+   </Box>}
+   <Row label="Instruction audit coverage"><Text>{text(s.executionAssurance?.instructionAuditCoverage==='ESTABLISHED'?'Observed instructions within established scope':s.executionAssurance?.instructionAuditCoverage==='PARTIAL'?'Partial':'Not established')}</Text></Row>
+   <Row label="Integration review"><Text>{text(s.executionAssurance?.integrationReview==='ESTABLISHED'?'Observed call edges within established scope':s.executionAssurance?.integrationReview==='PARTIAL'?'Partial':'Not established')}</Text></Row>
+   <Text size="sm">Component counts below describe review scope, separately from repeated calls.</Text>
    <Row label="Observed call frames"><Text>{text(String(c.observedFrames))}</Text></Row>
    <Row label="Assessed components"><Text>{text(String(c.assessedComponents))}</Text></Row>
    <Row label="Reviewed"><Text>{text(String(c.covered))}</Text></Row>

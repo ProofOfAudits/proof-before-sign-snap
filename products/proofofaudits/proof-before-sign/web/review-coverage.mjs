@@ -1,3 +1,5 @@
+import {executionAssurance} from './execution-assurance.mjs';
+import {executionComplete} from './execution-completeness.mjs';
 // The ONE deterministic review-coverage classifier shared by the engine,
 // the Explorer and the Snap. Pure: no network, no signature checks. Wallet
 // callers must pass a proof that was already verified and transaction-bound.
@@ -23,7 +25,7 @@ export function classifyComponent(c){
  if(!identified||c?.coverageLevel==='ROUTING_UNRESOLVED')return 'UNRESOLVED';
  return 'REVIEW_COVERAGE_UNKNOWN';
 }
-const matches=(c,f)=>lower(c?.address)===lower(f?.address)&&lower(c?.context)===lower(f?.context)&&lower(c?.selector)===frameSelector(f);
+const matches=(c,f)=>c?.relation!=='STATIC_REACHABLE'&&lower(c?.address)===lower(f?.address)&&lower(c?.context)===lower(f?.context)&&lower(c?.selector)===frameSelector(f);
 export function reviewCoverage(proof){
  const components=Array.isArray(proof?.components)?proof.components:[];
  const frames=Array.isArray(proof?.traceFrames)?proof.traceFrames:null;
@@ -33,21 +35,26 @@ export function reviewCoverage(proof){
  // Same full-path rule as the wallet: exact address+context+selector; a
  // depth-0 proxy entry is routing; no-code and precompile frames are not
  // review subjects. Repeated calls to one unmatched step count once.
- const proxy=['ERC1967','BEACON','ERC1167'].includes(proof?.resolution?.proxy);
+ // A proxy dispatcher executes code too; standard routing never grants its
+ // bytecode an implicit audit exemption.
  const steps=new Set(),frameClasses=[];
  for(const [index,f] of (frames??[]).entries()){
   const i=components.findIndex(c=>matches(c,f));
   if(i>=0){frameClasses.push({index,class:componentClasses[i]});continue;}
   if(f?.codePresent===false||isPrecompile(f?.address)){frameClasses.push({index,class:'NO_CODE'});continue;}
-  if(f?.depth===0&&proxy){frameClasses.push({index,class:'PROXY_ENTRY'});continue;}
   steps.add(lower(f?.address)+'|'+lower(f?.context)+'|'+frameSelector(f));frameClasses.push({index,class:'UNRESOLVED'});
  }
  const unresolved=steps.size+unresolvedComponents;
  const traceUnavailable=Array.isArray(proof?.reasons)&&proof.reasons.includes('execution_trace_unavailable');
- const observedFrames=Number.isSafeInteger(proof?.traceCompleteness?.observedFrames)?proof.traceCompleteness.observedFrames:traceUnavailable?0:(frames?.length??0);
+ const observedFrames=Number.isSafeInteger(proof?.traceCompleteness?.observedFrames)&&proof.traceCompleteness.observedFrames>=(frames?.length??0)?proof.traceCompleteness.observedFrames:traceUnavailable?0:(frames?.length??0);
  const counts={observedFrames,assessedComponents:components.length,covered,changed,excluded,unknown,unresolved};
+ const assurance=executionAssurance(proof);
+ const instructionGap=!!proof?.executionRegions&&assurance.instructionAuditCoverage!=='ESTABLISHED';
+ const integrationGap=!!proof?.executionRegions?.integration?.edges?.length&&assurance.integrationReview!=='ESTABLISHED';
  const reasons=[];
- if(proof?.traceComplete!==true||!frames)reasons.push('execution_path_incomplete');
+ if(instructionGap)reasons.push('instruction_scope_incomplete');
+ if(integrationGap)reasons.push('integration_scope_incomplete');
+ if(!executionComplete(proof))reasons.push('execution_path_incomplete');
  if(unresolved>0)reasons.push('unresolved_components');
  if(changed>0)reasons.push('changed_since_review');
  if(unknown>0)reasons.push('review_coverage_unknown');
@@ -64,20 +71,22 @@ export function reviewCoverage(proof){
  // unidentified remain UNRESOLVED above.
  let verdict;
  if(!components.length&&!frames?.length)verdict='UNKNOWN';
- else if(proof?.traceComplete!==true||!frames||unresolved>0)verdict='INCOMPLETE';
- else if(components.length&&covered===components.length)verdict='FULLY_REVIEW_COVERED';
+ else if(!executionComplete(proof)||unresolved>0)verdict='INCOMPLETE';
+ else if(components.length&&covered===components.length&&!instructionGap&&!integrationGap)verdict='FULLY_REVIEW_COVERED';
  else if(covered>0)verdict='PARTIALLY_REVIEW_COVERED';
  else if(components.length&&excluded+changed===components.length)verdict='NOT_REVIEW_COVERED';
  else verdict='UNKNOWN';
  const block=proof?.block&&typeof proof.block.number==='string'&&typeof proof.block.hash==='string'?{number:proof.block.number,hash:proof.block.hash}:null;
- return {schemaVersion:REVIEW_COVERAGE_SCHEMA,verdict,label:VERDICT_LABELS[verdict],changedWarning:changed>0,explanation:explain(verdict,counts),counts,componentClasses,frames:frameClasses,checkedBlock:block,reasons};
+ return {schemaVersion:REVIEW_COVERAGE_SCHEMA,verdict,label:VERDICT_LABELS[verdict],changedWarning:changed>0,explanation:explain(verdict,counts,instructionGap,integrationGap),counts,componentClasses,frames:frameClasses,checkedBlock:block,reasons};
 }
-function explain(verdict,c){
+function explain(verdict,c,instructionGap=false,integrationGap=false){
  const list=parts=>parts.length>1?parts.slice(0,-1).join(', ')+' and '+parts.at(-1):parts[0];
  const blockers=[c.changed&&'changed',c.unknown&&'unknown',c.unresolved&&'unresolved',c.excluded&&'excluded'].filter(Boolean);
- if(verdict==='FULLY_REVIEW_COVERED')return 'Every assessed component matches its approved review scope.';
+ if(verdict==='FULLY_REVIEW_COVERED')return 'Every assessed component matches its approved review scope. This does not establish instruction-level or integration review coverage.';
  if(verdict==='INCOMPLETE')return c.unresolved?'Unresolved calls prevent a complete review-coverage conclusion.':'The complete execution path was not established.';
  if(verdict==='NOT_REVIEW_COVERED')return 'No assessed component is covered by current approved review scope.';
+ if(verdict==='PARTIALLY_REVIEW_COVERED'&&instructionGap)return 'Instruction-level audit scope is incomplete or unavailable for this execution.';
+ if(verdict==='PARTIALLY_REVIEW_COVERED'&&integrationGap)return 'Review evidence does not cover every observed call edge.';
  if(verdict==='PARTIALLY_REVIEW_COVERED')return list(blockers).replace(/^./,v=>v.toUpperCase())+' components prevent a fully reviewed conclusion.';
  return c.assessedComponents?'Review coverage is not established for the assessed components.':'No execution evidence was established for this transaction.';
 }

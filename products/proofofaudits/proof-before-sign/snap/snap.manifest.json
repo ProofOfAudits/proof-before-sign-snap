@@ -1,5 +1,5 @@
 {
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Check live review evidence before signing.",
   "proposedName": "Proof Before Sign",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/ProofOfAudits/proof-before-sign-snap.git"
   },
   "source": {
-    "shasum": "tqs86M0MLBXRwU/PHDV1bWJb4uBkkr+fDzxWrOW3qmI=",
+    "shasum": "U6VtWnpsQ+tqekteN7rIj+UlS/KjdFI4I2S/A1/qdGw=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",

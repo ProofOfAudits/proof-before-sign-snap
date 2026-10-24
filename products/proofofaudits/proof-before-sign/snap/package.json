@@ -1,24 +1,13 @@
 {
   "name": "@proofofaudits/proof-before-sign-snap",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": false,
   "description": "Transaction-specific review evidence before signing",
-  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/ProofOfAudits/proof-before-sign-snap.git"
   },
   "main": "dist/bundle.js",
-  "files": [
-    "dist/bundle.js",
-    "snap.manifest.json",
-    "images/icon.svg",
-    "README.md"
-  ],
-  "scripts": {
-    "build": "node scripts/build.mjs",
-    "check:manifest": "node scripts/check-manifest.mjs"
-  },
   "dependencies": {
     "@metamask/snaps-sdk": "9.3.0",
     "@noble/curves": "1.9.7",
@@ -40,5 +29,20 @@
     "uuid@^9.0.1": "11.1.1",
     "@metamask/snaps-controllers": "21.1.1",
     "@metamask/snaps-execution-environments": "11.3.1"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://proofofaudits.com/try",
+  "bugs": {
+    "email": "veer@proofofaudits.com"
+  },
+  "files": [
+    "README.md",
+    "dist/bundle.js",
+    "snap.manifest.json",
+    "images/icon.svg"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check:manifest": "node scripts/check-manifest.mjs"
   }
 }
