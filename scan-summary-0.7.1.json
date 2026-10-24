@@ -1,0 +1,23 @@
+{
+  "tool": "@sayfer_io/snapper",
+  "version": "0.19.1",
+  "upstreamCommit": "66ea3158b89039cfa2453c5021aa965985c9135c",
+  "installation": "Official tagged source and npm ci from upstream lockfile; no detector exclusions or patches",
+  "findings": {
+    "ConsoleLog": 2,
+    "DependencyOutdated": 22,
+    "FloatingPointPrecision": 1,
+    "UnhandledPromiseRejection": 6
+  },
+  "productionDependencyVulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "diagnosticLoggingCompiledFalse": true,
+  "noZeroFindingClaim": true,
+  "independentAudit": false
+}

@@ -1,0 +1,289 @@
+{
+  "ConsoleLog": [
+    {
+      "type": "ConsoleLog",
+      "description": "Presence of console log function detected.",
+      "position": {
+        "filePath": "snap/dist/bundle.js",
+        "lineNum": 1
+      },
+      "riskRating": 1
+    },
+    {
+      "type": "ConsoleLog",
+      "description": "Presence of console log function detected.",
+      "position": {
+        "filePath": "snap/src/index.jsx",
+        "lineNum": 235
+      },
+      "riskRating": 1
+    }
+  ],
+  "DependencyOutdated": [
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @ethersproject/abi version 5.0.10 - 5.8.0: Vulnerability in @ethersproject/abi",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 1
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @ethersproject/abstract-provider version *: Vulnerability in @ethersproject/abstract-provider",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 1
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @ethersproject/abstract-signer version *: Vulnerability in @ethersproject/abstract-signer",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 1
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @ethersproject/hash version 5.0.6 - 5.8.0: Vulnerability in @ethersproject/hash",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 1
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @ethersproject/signing-key version <=5.8.0: Vulnerability in @ethersproject/signing-key",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 1
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @ethersproject/transactions version <=5.8.0: Vulnerability in @ethersproject/transactions",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 1
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/analytics-controller version 1.1.0 - 3.0.0: Vulnerability in @metamask/analytics-controller",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/chain-agnostic-permission version *: Vulnerability in @metamask/chain-agnostic-permission",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/controller-utils version >=8.0.3: Vulnerability in @metamask/controller-utils",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/ethjs-unit version >=0.3.0: Vulnerability in @metamask/ethjs-unit",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/number-to-bn version *: Vulnerability in @metamask/number-to-bn",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/permission-controller version >=8.0.1: Vulnerability in @metamask/permission-controller",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/snaps-controllers version >=6.0.0: Vulnerability in @metamask/snaps-controllers",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/snaps-execution-environments version >=5.0.0: Vulnerability in @metamask/snaps-execution-environments",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/snaps-jest version >=10.2.0: Vulnerability in @metamask/snaps-jest",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/snaps-rpc-methods version >=7.0.0: Vulnerability in @metamask/snaps-rpc-methods",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/snaps-simulation version *: Vulnerability in @metamask/snaps-simulation",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in @metamask/snaps-utils version >=7.0.0: Vulnerability in @metamask/snaps-utils",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in bn.js version 5.0.0 - 5.2.2: Vulnerability in bn.js",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in body-parser version 2.0.0 - 2.3.0: Vulnerability in body-parser",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 3
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in elliptic version *: Vulnerability in elliptic",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 1
+      },
+      "riskRating": 2
+    },
+    {
+      "type": "DependencyOutdated",
+      "description": "Vulnerability in uuid version <11.1.1: Vulnerability in uuid",
+      "position": {
+        "filePath": "snap/package.json",
+        "lineNum": 2
+      },
+      "riskRating": 2
+    }
+  ],
+  "FloatingPointPrecision": [
+    {
+      "type": "FloatingPointPrecision",
+      "description": "Potential floating-point precision issue detected in division operation.",
+      "position": {
+        "filePath": "snap/dist/bundle.js",
+        "lineNum": 195369
+      },
+      "riskRating": 2
+    }
+  ],
+  "UnhandledPromiseRejection": [
+    {
+      "type": "UnhandledPromiseRejection",
+      "description": "Empty or ineffective catch block detected, which can lead to unhandled promise rejections.",
+      "position": {
+        "filePath": "snap/dist/bundle.js",
+        "lineNum": 226635
+      },
+      "riskRating": 3
+    },
+    {
+      "type": "UnhandledPromiseRejection",
+      "description": "Empty or ineffective catch block detected, which can lead to unhandled promise rejections.",
+      "position": {
+        "filePath": "snap/dist/bundle.js",
+        "lineNum": 227469
+      },
+      "riskRating": 3
+    },
+    {
+      "type": "UnhandledPromiseRejection",
+      "description": "Empty or ineffective catch block detected, which can lead to unhandled promise rejections.",
+      "position": {
+        "filePath": "snap/dist/bundle.js",
+        "lineNum": 230806
+      },
+      "riskRating": 3
+    },
+    {
+      "type": "UnhandledPromiseRejection",
+      "description": "Empty or ineffective catch block detected, which can lead to unhandled promise rejections.",
+      "position": {
+        "filePath": "snap/src/index.jsx",
+        "lineNum": 27048
+      },
+      "riskRating": 3
+    },
+    {
+      "type": "UnhandledPromiseRejection",
+      "description": "Empty or ineffective catch block detected, which can lead to unhandled promise rejections.",
+      "position": {
+        "filePath": "snap/src/index.jsx",
+        "lineNum": 27968
+      },
+      "riskRating": 3
+    },
+    {
+      "type": "UnhandledPromiseRejection",
+      "description": "Empty or ineffective catch block detected, which can lead to unhandled promise rejections.",
+      "position": {
+        "filePath": "snap/src/index.jsx",
+        "lineNum": 31523
+      },
+      "riskRating": 3
+    }
+  ]
+}

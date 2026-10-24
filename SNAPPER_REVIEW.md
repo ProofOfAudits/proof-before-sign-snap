@@ -1,0 +1,14 @@
+# Snapper review — 0.7.1
+
+Snapper 0.19.1 ran from official tag commit `66ea3158b89039cfa2453c5021aa965985c9135c` using its upstream lockfile, without detector exclusions or patches. A fresh npm exec installation failed on an upstream transitive workspace protocol, so the tagged, lockfile-pinned source was used. The scan covered the clean-rebuilt public source and actual bundle. This is engineering review, not an independent audit or MetaMask acceptance.
+
+31 findings were reported: 22 DependencyOutdated, two ConsoleLog, six UnhandledPromiseRejection and one FloatingPointPrecision. The latter three categories duplicate some source and bundled occurrences. The scanner's lineNum values in these AST findings are character positions, not reliable line numbers.
+
+- The 22 dependency findings concern the development/test/validator tree. Production-only npm audit reports zero vulnerabilities. The bundle input inventory contains SDK, utility, encoding and noble cryptographic libraries; the flagged ethers v5, elliptic, controllers and snaps-jest execution tooling are not shipped as those dependencies in the runtime bundle. Development findings remain disclosed; zero production findings do not mean a vulnerability-free product or build environment.
+- Two ConsoleLog findings refer to the same private diagnostic error logger in source and bundle. The production bundle fixes diagnosticSimulation to false; the setting is not exposed to transaction input or Snap settings. No public diagnostic log is emitted. The guarded diagnostic source remains visible and is disclosed for MetaMask's review; do not claim all console text has been removed or that the scanner found none.
+- The six catch findings are three duplicated settings/monitoring/feedback cases. Missing settings leave activity unavailable, prevent a feedback request, or fail a disabled-monitor cleanup. They do not create review coverage or suppress signature verification. Actual-bundle PAUSED and settings-failure checks exercise these conservative outcomes. These are intentional fail-closed handlers rather than uncaught promise authorization paths.
+- FloatingPointPrecision refers to rounding observation age in seconds for display. It does not compute token amounts, audit coverage or signature expiry. Expiry remains checked against the exact signed timestamps.
+
+The official MetaMask manifest/checksum and SES bundle evaluation returned zero errors and warnings. All findings and these dispositions must remain available to MetaMask; their review may require further changes. No finding is silently suppressed, and no independent security audit is asserted.
+
+See `scan-findings-0.7.1.json`, `scan-summary-0.7.1.json`, `production-dependency-audit-0.7.1.json` and the public source README. The npm archive SHA256 is `188cab9d41a74f0e2c55ccb4599539377733ac99665dc7d8735dc627273b99c9`.
